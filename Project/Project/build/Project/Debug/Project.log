@@ -1,0 +1,19 @@
+﻿Build started 2013-12-21 15:13:38.
+     1>Project "C:\Users\Nicolina\Documents\GitHub\ProgrammingProject\Project\Project\Project\Project.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I../deps/sdl2/include /I../deps/sdl2_image/include /I../deps/sdl2_mixer/include /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"../build/Project/Debug\\" /Fd"../build/Project/Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt Engine.cpp main.cpp
+         Engine.cpp
+         Generating Code...
+         Compiling...
+         main.cpp
+         Generating Code...
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"../bin/Project_x86d.exe" /INCREMENTAL /NOLOGO /LIBPATH:../deps/sdl2/lib/x86 /LIBPATH:../deps/sdl2_image/lib/x86 /LIBPATH:../deps/sdl2_mixer/lib/x86 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"../bin/Project_x86d.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"../bin/Project_x86d.lib" /MACHINE:X86 ../build/Project/Debug\Engine.obj
+         ../build/Project/Debug\Log.obj
+         ../build/Project/Debug\main.obj
+         Project.vcxproj -> C:\Users\Nicolina\Documents\GitHub\ProgrammingProject\Project\Project\Project\../bin/Project_x86d.exe
+     1>Done Building Project "C:\Users\Nicolina\Documents\GitHub\ProgrammingProject\Project\Project\Project\Project.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:01.52
