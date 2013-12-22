@@ -25,9 +25,18 @@ bool Engine::Initialize() {
 	m_window = SDL_CreateWindow("DuckHunt", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
 		m_width, m_height,
 		SDL_WINDOW_OPENGL);
+
+	m_renderer = SDL_CreateRenderer(m_window, -1,
+		SDL_RENDERER_ACCELERATED);
+
 	if(m_window == nullptr) { return false; };
 
 	m_running = true;
+
+/*	m_duck = new DuckObject(nullptr);
+	m_duck->SetPosition();
+	AnimatedSprite* sprite = m_sprite_manager->Load("../data/animations/duck_flying.txt");
+	m_duck->AddAnimation("Flying", sprite);*/
 
 	return true;
 };
@@ -36,6 +45,11 @@ void Engine::Run() {
 	while(m_running) {
 		UpdateDeltatime();
 		UpdateEvents();
+
+
+		SDL_SetRenderDrawColor(m_renderer, 60, 190, 255, 255);
+		SDL_RenderClear(m_renderer);
+		SDL_RenderPresent(m_renderer);
 		};
 		SDL_Delay(10);
 };

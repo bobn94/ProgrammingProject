@@ -2,6 +2,8 @@
 
 #include "Log.h"
 
+class DuckObject;
+
 class Engine {
 public:
 	Engine();
@@ -17,6 +19,7 @@ private:
 
 private:
 	struct SDL_Window *m_window;
+	struct SDL_Renderer *m_renderer;
 
 	bool m_running;
 	int m_width;
@@ -25,4 +28,5 @@ private:
 	unsigned int m_ticks;
 
 	Log m_log;
+	DuckObject* m_duck;
 };

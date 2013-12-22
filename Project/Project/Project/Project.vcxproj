@@ -88,11 +88,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Animation.cpp" />
+    <ClCompile Include="DuckObject.cpp" />
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="Log.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Animation.h" />
+    <ClInclude Include="DuckObject.h" />
     <ClInclude Include="Engine.h" />
     <ClInclude Include="Log.h" />
     <ClInclude Include="Sprite.h" />
