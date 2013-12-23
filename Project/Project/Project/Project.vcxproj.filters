@@ -18,6 +18,7 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="DrawManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -25,6 +26,18 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SpriteManager.cpp">
+=======
+    <ClCompile Include="Engine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Log.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DuckObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation.cpp">
+>>>>>>> a4898c2af16098eeed8b892b1188d59662d4757d
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -35,7 +48,20 @@
     <ClInclude Include="Sprite.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="DrawManager.h">
+=======
+    <ClInclude Include="Engine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Log.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DuckObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation.h">
+>>>>>>> a4898c2af16098eeed8b892b1188d59662d4757d
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
