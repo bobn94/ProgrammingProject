@@ -82,6 +82,8 @@
   <ItemGroup>
     <ClCompile Include="DrawManager.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Sprite.cpp" />
+    <ClCompile Include="SpriteManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DrawManager.h" />
