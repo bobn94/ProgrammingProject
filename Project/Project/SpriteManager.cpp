@@ -7,7 +7,7 @@
 #include "DrawManager.h"
 #include <fstream>
 #include <sstream>
-//#include "AnimatedSprite.h"					//code for if/when animation is added
+#include "Animation.h"
 
 SpriteManager::SpriteManager(DrawManager *draw_manager)
 {
@@ -51,7 +51,7 @@ SpriteManager::SpriteManager(DrawManager *draw_manager)
 		}
 		return new Sprite(it->second.surface, it->second.texture, x, y, width, height);
 	}
-	/*AnimatedSprite* SpriteManager::Load(const std::string &filename){					//code for if/when animation is added
+Animation* SpriteManager::Load(const std::string &filename){					//code for if/when animation is added
 		std::ifstream stream;
 		stream.open(filename.c_str());
 		if(!stream.is_open()){
@@ -71,7 +71,7 @@ SpriteManager::SpriteManager(DrawManager *draw_manager)
 		SDL_Surface *surface = it->second.surface;
 		SDL_Texture *texture = it->second.texture;
 
-		AnimatedSprite *sprite = new AnimatedSprite(surface, texture, 0, 0, 0, 0);
+		Animation *sprite = new Animation(surface, texture, 0, 0, 0, 0);
 
 		while(!stream.eof()){
 			std::getline(stream, row);
@@ -80,13 +80,13 @@ SpriteManager::SpriteManager(DrawManager *draw_manager)
 			}
 			std::stringstream ss(row);
 
-			AnimatedSprite::Frame frame;
+			Animation::Frame frame;
 
 			ss >> frame.duration;
 			ss >> frame.x;
 			ss >> frame.y;
-			ss >> frame.w;
-			ss >> frame.h;
+			ss >> frame.width;
+			ss >> frame.height;
 			sprite->AddFrame(frame);
 
 		}
@@ -94,7 +94,7 @@ SpriteManager::SpriteManager(DrawManager *draw_manager)
 		
 		stream.close();
 		return sprite;
-	}*/
+	}
 	bool SpriteManager::LoadImage(std::string &filename){
 		std::string path = m_directory + filename;
 		SDL_Surface *surface = IMG_Load(path.c_str());

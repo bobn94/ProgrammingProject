@@ -1,5 +1,4 @@
 #include "DuckObject.h"
-
 /*
 DuckObject::DuckObject(Sprite* sprite = nullptr) {
 }

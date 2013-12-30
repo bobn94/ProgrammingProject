@@ -1,5 +1,5 @@
 #include "Animation.h"
-/*
+
 Animation::Animation(SDL_Surface *surface, SDL_Texture *texture, int x, int y, int width, int height)
 : Sprite(surface, texture, x, y, width, height) {
 	m_time = 0.0f;
@@ -22,4 +22,4 @@ void Animation::Update(float deltatime) {
 
 void Animation::AddFrame(Frame &frame) {
 	m_animation.push_back(frame);
-};*/
+};

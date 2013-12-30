@@ -1,6 +1,6 @@
 #pragma once
 #include <map>
-//#include "AnimatedSprite.h"					//code for if/when animation is added
+#include "Animation.h"
 #include <string>
 
 class Sprite;
@@ -20,11 +20,11 @@ public:
 	void cleanup();
 	bool LoadImage(std::string &filename);
 	virtual Sprite* Load(const std::string &filename, int x, int y, int width, int height);
-	//AnimatedSprite* Load(const std::string &filename);					//code for if/when animation is added
+	Animation* Load(const std::string &filename);
 private:
 	std::string m_directory;
 	std::string m_filename;
-	//AnimatedSprite::Frame m_frame;					//code for if/when animation is added
+	Animation::Frame m_frame;
 	std::map<std::string,Pair> m_sprites;
 	DrawManager *m_draw_manager;
 };

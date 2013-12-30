@@ -1,0 +1,25 @@
+﻿Build started 2013-12-29 22:35:37.
+     1>Project "C:\Users\Nicolina\Documents\GitHub\ProgrammingProject\Project\Project\Project.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I../dependencies/sdl2/include /I../dependencies/sdl2_image/include /I../dependencies/sdl2_mixer/include /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt SoundManager.cpp main.cpp
+         main.cpp
+     1>c:\users\nicolina\documents\github\programmingproject\project\project\main.cpp(1): error C2059: syntax error : '<<'
+     1>c:\users\nicolina\documents\github\programmingproject\project\dependencies\sdl2\include\sdl_platform.h(139): error C2143: syntax error : missing ';' before '{'
+     1>c:\users\nicolina\documents\github\programmingproject\project\dependencies\sdl2\include\sdl_platform.h(139): error C2447: '{' : missing function header (old-style formal list?)
+     1>c:\users\nicolina\documents\github\programmingproject\project\project\main.cpp(11): error C2143: syntax error : missing ';' before '=='
+     1>c:\program files (x86)\microsoft visual studio 11.0\vc\include\yvals.h(185): warning C4384: #pragma 'detect_mismatch' should only be used at global scope
+     1>c:\program files (x86)\microsoft visual studio 11.0\vc\include\yvals.h(189): warning C4384: #pragma 'detect_mismatch' should only be used at global scope
+     1>c:\program files (x86)\microsoft visual studio 11.0\vc\include\yvals.h(200): warning C4384: #pragma 'detect_mismatch' should only be used at global scope
+     1>c:\program files (x86)\microsoft visual studio 11.0\vc\include\yvals.h(491): error C2143: syntax error : missing ';' before '{'
+     1>c:\program files (x86)\microsoft visual studio 11.0\vc\include\yvals.h(542): error C2870: 'std' : a namespace definition must appear either at file scope or immediately within another namespace definition
+     1>c:\program files (x86)\microsoft visual studio 11.0\vc\include\math.h(27): error C2598: linkage specification must be at global scope
+     1>c:\program files (x86)\microsoft visual studio 11.0\vc\include\math.h(37): fatal error C1903: unable to recover from previous error(s); stopping compilation
+         SoundManager.cpp
+     1>c:\users\nicolina\documents\github\programmingproject\project\project\soundmanager.cpp(15): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\nicolina\documents\github\programmingproject\project\project\soundmanager.cpp(21): warning C4018: '<' : signed/unsigned mismatch
+         Generating Code...
+     1>Done Building Project "C:\Users\Nicolina\Documents\GitHub\ProgrammingProject\Project\Project\Project.vcxproj" (Build target(s)) -- FAILED.
+
+Build FAILED.
+
+Time Elapsed 00:00:00.88
