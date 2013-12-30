@@ -33,11 +33,6 @@ bool Engine::Initialize() {
 
 	m_running = true;
 
-/*	m_duck = new DuckObject(nullptr);
-	m_duck->SetPosition();
-	AnimatedSprite* sprite = m_sprite_manager->Load("../data/animations/duck_flying.txt");
-	m_duck->AddAnimation("Flying", sprite);*/
-
 	return true;
 };
 

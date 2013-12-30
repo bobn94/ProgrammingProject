@@ -12,6 +12,7 @@ public:
 	void Play();
 	void Pause();
 	void Stop();
+// Maybe going to add Playlists/Volume/Resume
 
 private:
 	Mix_Music* m_xClip;

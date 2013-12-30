@@ -28,5 +28,4 @@ private:
 	unsigned int m_ticks;
 
 	Log m_log;
-	DuckObject* m_duck;
 };
