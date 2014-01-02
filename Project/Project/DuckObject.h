@@ -2,8 +2,8 @@
 
 #include <map>
 #include <string>
-
-/*#include "GameObject.h"
+#include "Animation.h"
+#include "GameObject.h"
 
 class Sprite;
 
@@ -13,10 +13,10 @@ public:
 
 	void Update(float deltatime);
 
-	void AddAnimation(const std::string &name, AnimatedSprite *sprite);
+	void AddAnimation(const std::string &name, Animation *sprite);
 
 protected:
 
-	AnimatedSprite *m_current_animation;
-	std::map<std::string, AnimatedSprite*> m_animations;
-};*/
+	Animation *m_current_animation;
+	std::map<std::string, Animation*> m_animations;
+};
