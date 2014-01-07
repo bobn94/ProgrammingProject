@@ -1,7 +1,7 @@
 
 #include "Sprite.h"
 #include "GameObject.h"
-#include "Collider.h"
+//#include "Collider.h"
 
 GameObject::GameObject(Sprite *sprite, Collider *collider, int flag)
 :m_sprite(sprite)
@@ -24,10 +24,10 @@ GameObject::GameObject(Sprite *sprite, Collider *collider, int flag)
 		return m_sprite;
 	}
 	
-	bool GameObject::HasCollider() const{
+	/*bool GameObject::HasCollider() const{
 		
 		return m_collider != nullptr;
 	}
 	Collider* GameObject::GetCollider(){
 		return m_collider;
-	}
+	}*/
