@@ -39,23 +39,12 @@ bool Level::Load(const std::string &filename, SpriteManager *sprite_manager){
 		std::string ch;
 		Cords cord;
 
-		ss >> ch;
+		ss >> ch;		// laddar in en del av en bild som fins på pixlarna x,y - x+w, y+h
 		ss >> cord.x;
 		ss >> cord.y;
 		ss >> cord.w;
 		ss >> cord.h;
 		ss >> cord.f;
-		int tempx;
-		int tempy;
-/*		tempx = cord.x * 2;
-		tempy = cord.y * 2;
-		cord.x *= 32;
-		cord.y *= 32;
-		cord.w *= 8;
-		cord.h *= 8;
-		cord.x += tempx;
-		cord.y += tempy;
-		*/
 		m_tile_cords.insert( std::pair<char,Cords>(ch[0], cord));
 	}
 	unsigned int x = 0;
@@ -71,12 +60,7 @@ bool Level::Load(const std::string &filename, SpriteManager *sprite_manager){
 				x += 32;
 				continue;
 			}
-			else if(row[i] == 'S'){
-				m_start_position.m_x = x;
-				m_start_position.m_y = y;
-				x += 32;
-				continue;
-			}
+			
 
 			std::map<char,Cords>::iterator it = m_tile_cords.find(row[i]);
 			if(it == m_tile_cords.end()){
@@ -85,12 +69,12 @@ bool Level::Load(const std::string &filename, SpriteManager *sprite_manager){
 			Cords &c = it->second;
 			Sprite *sprite = sprite_manager->Load(m_spritemap_filename, c.x, c.y, c.w, c.h);
 			Collider *collider = new Collider;
-			if(c.f){
+			if(c.f){ // om flaggan är 1, ge objectet en collider
 			
 			collider->m_position = Vector2(x,y);
 			collider->m_extention = Vector2(c.w, c.h);
 			}
-			else{
+			else{// är flaggan inte 1, ge den inte en collider
 				delete collider;
 				collider = nullptr;
 			}
@@ -130,8 +114,4 @@ bool Level::CheckCollision(GameObject *object, Vector2 &offset){
 		}
 	}
 	return false;
-}
-
-Vector2 Level::GetPlayerStartPosition(){
-	return m_start_position;
 }
