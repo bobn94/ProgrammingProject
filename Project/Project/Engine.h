@@ -5,7 +5,8 @@
 class DrawManager;
 class SpriteManager;
 class DuckObject;
-//class Level;
+class Collider;
+class Level;
 class Input;
 
 class Engine {
@@ -23,7 +24,7 @@ private:
 
 private:
 	struct SDL_Window *m_window;
-
+	Level* m_level;
 	DrawManager *m_draw_manager;
 	SpriteManager *m_sprite_manager;
 
@@ -34,7 +35,7 @@ private:
 	int m_height;
 	float m_deltatime;
 	unsigned int m_ticks;
-
+	Collider *m_collider;
 	DuckObject *m_duck;
 	Input *m_input;
 };
