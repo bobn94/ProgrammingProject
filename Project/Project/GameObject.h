@@ -20,5 +20,5 @@ protected:
 	Vector2 m_position;
 	Sprite* m_sprite;
 	Collider *m_collider;
-	int m_flag;
+	int m_flag;// flagga för att kunna välja om ett object ska få en collider eller inte
 };
