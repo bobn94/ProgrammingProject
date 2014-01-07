@@ -2,7 +2,7 @@
 #pragma once
 #include "Vector2.h"
 
-class PlayerObject;
+class DuckObject;
 
 class Collider{
 public:

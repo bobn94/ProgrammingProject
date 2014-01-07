@@ -2,10 +2,14 @@
 
 #include "Log.h"
 
+class DrawManager;
+class SpriteManager;
 class DuckObject;
+//class Level;
+class Input;
 
 class Engine {
-public:
+public: 
 	Engine();
 	~Engine();
 
@@ -14,12 +18,16 @@ public:
 	void Cleanup();
 
 private:
-	void UpdateDeltatime();
 	void UpdateEvents();
+	void UpdateDeltatime();
 
 private:
 	struct SDL_Window *m_window;
-	struct SDL_Renderer *m_renderer;
+
+	DrawManager *m_draw_manager;
+	SpriteManager *m_sprite_manager;
+
+	Log m_log;
 
 	bool m_running;
 	int m_width;
@@ -27,5 +35,6 @@ private:
 	float m_deltatime;
 	unsigned int m_ticks;
 
-	Log m_log;
+	DuckObject *m_duck;
+	Input *m_input;
 };

@@ -1,5 +1,5 @@
 #include "Collider.h"
-#include "PlayerObject.h"
+#include "DuckObject.h"
 #include <cmath>
 
 Collider::Collider()

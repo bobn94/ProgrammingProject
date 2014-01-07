@@ -1,35 +1,56 @@
 #include <SDL.h>
-#pragma comment(lib,"sdl2.lib")
-#pragma comment(lib,"sdl2main.lib")
+#include <iostream>
+#pragma comment (lib, "sdl2.lib")
+#pragma comment(lib, "sdl2main.lib")
 
+#include "DrawManager.h"
+#include "SpriteManager.h"
+#include "Level.h"
+#include "DuckObject.h"
+//#include "Collider.h"
 #include "Engine.h"
 
 Engine::Engine() : m_log("log.txt") {
 	m_window = nullptr;
+
+	m_draw_manager = nullptr;
+	m_sprite_manager = nullptr;
 
 	m_running = false;
 	m_width = 0;
 	m_height = 0;
 	m_deltatime = 0.01f;
 	m_ticks = SDL_GetTicks();
+
+	m_duck = nullptr;
 };
 
 Engine::~Engine() {
 };
 
 bool Engine::Initialize() {
-	m_width = 256;
-	m_height = 240;
+	m_width = 1024;
+	m_height = 640;
 
 	SDL_Init(SDL_INIT_EVERYTHING);
 	m_window = SDL_CreateWindow("DuckHunt", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
 		m_width, m_height,
 		SDL_WINDOW_OPENGL);
 
-	m_renderer = SDL_CreateRenderer(m_window, -1,
-		SDL_RENDERER_ACCELERATED);
+	m_draw_manager = new DrawManager;
+	if(!m_draw_manager->Initialize(m_window, m_width, m_height)) {
+		return false;
+	};
+
+	m_sprite_manager = new SpriteManager(m_draw_manager);
+	if(!m_sprite_manager->Initialize("../data/sprites/")){
+		return false;
+	};
 
 	if(m_window == nullptr) { return false; };
+
+	Sprite* sprite = m_sprite_manager->Load("p2_spritesheet.png", 0, 0, 70, 70);
+	m_duck = new DuckObject(sprite);
 
 	m_running = true;
 
@@ -41,12 +62,21 @@ void Engine::Run() {
 		UpdateDeltatime();
 		UpdateEvents();
 
+		m_duck->Update(m_deltatime);
+	
+		Vector2 offset;
 
-		SDL_SetRenderDrawColor(m_renderer, 60, 190, 255, 255);
-		SDL_RenderClear(m_renderer);
-		SDL_RenderPresent(m_renderer);
-		};
+		m_draw_manager->Clear();
+		
+		m_draw_manager->Draw(
+			m_duck->GetSprite(),
+			m_duck->GetPosition().m_x,
+			m_duck->GetPosition().m_y);
+
+		m_draw_manager->Present();
+
 		SDL_Delay(10);
+	};
 };
 
 void Engine::Cleanup() {
