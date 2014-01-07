@@ -20,4 +20,5 @@ protected:
 	Vector2 m_position;
 	Sprite* m_sprite;
 	Collider *m_collider;
+	int m_flag;
 };
