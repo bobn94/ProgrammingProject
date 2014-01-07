@@ -81,10 +81,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Animation.cpp" />
+    <ClCompile Include="Collider.cpp" />
     <ClCompile Include="DrawManager.cpp" />
     <ClCompile Include="DuckObject.cpp" />
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="Level.cpp" />
     <ClCompile Include="Log.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MusicClip.cpp" />
@@ -96,10 +98,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h" />
+    <ClInclude Include="Collider.h" />
     <ClInclude Include="DrawManager.h" />
     <ClInclude Include="DuckObject.h" />
     <ClInclude Include="Engine.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="Level.h" />
     <ClInclude Include="Log.h" />
     <ClInclude Include="MusicClip.h" />
     <ClInclude Include="SoundClip.h" />

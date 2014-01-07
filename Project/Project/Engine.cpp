@@ -18,8 +18,8 @@ Engine::~Engine() {
 };
 
 bool Engine::Initialize() {
-	m_width = 1024;
-	m_height = 640;
+	m_width = 256;
+	m_height = 240;
 
 	SDL_Init(SDL_INIT_EVERYTHING);
 	m_window = SDL_CreateWindow("DuckHunt", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
