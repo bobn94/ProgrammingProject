@@ -1,24 +1,33 @@
-﻿Build started 2014-01-07 10:14:01.
+﻿Build started 2014-01-07 10:54:23.
      1>Project "C:\Users\Nicolina\Documents\GitHub\ProgrammingProject\Project\Project\Project.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I../dependencies/sdl2/include /I../dependencies/sdl2_image/include /I../dependencies/sdl2_mixer/include /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt DuckObject.cpp GameObject.cpp main.cpp
-         main.cpp
-     1>c:\program files (x86)\microsoft visual studio 11.0\vc\include\yvals.h(185): warning C4384: #pragma 'detect_mismatch' should only be used at global scope
-     1>c:\program files (x86)\microsoft visual studio 11.0\vc\include\yvals.h(189): warning C4384: #pragma 'detect_mismatch' should only be used at global scope
-     1>c:\program files (x86)\microsoft visual studio 11.0\vc\include\yvals.h(200): warning C4384: #pragma 'detect_mismatch' should only be used at global scope
-     1>c:\program files (x86)\microsoft visual studio 11.0\vc\include\yvals.h(491): error C2870: 'std' : a namespace definition must appear either at file scope or immediately within another namespace definition
-     1>c:\program files (x86)\microsoft visual studio 11.0\vc\include\yvals.h(542): error C2870: 'std' : a namespace definition must appear either at file scope or immediately within another namespace definition
-     1>c:\program files (x86)\microsoft visual studio 11.0\vc\include\math.h(27): error C2598: linkage specification must be at global scope
-     1>c:\program files (x86)\microsoft visual studio 11.0\vc\include\math.h(37): fatal error C1903: unable to recover from previous error(s); stopping compilation
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I../dependencies/sdl2/include /I../dependencies/sdl2_image/include /I../dependencies/sdl2_mixer/include /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt Collider.cpp DuckObject.cpp GameObject.cpp Level.cpp
+         Level.cpp
+     1>c:\users\nicolina\documents\github\programmingproject\project\project\level.cpp(75): error C2065: 'm_start_position' : undeclared identifier
+     1>c:\users\nicolina\documents\github\programmingproject\project\project\level.cpp(75): error C2228: left of '.m_x' must have class/struct/union
+                 type is ''unknown-type''
+     1>c:\users\nicolina\documents\github\programmingproject\project\project\level.cpp(76): error C2065: 'm_start_position' : undeclared identifier
+     1>c:\users\nicolina\documents\github\programmingproject\project\project\level.cpp(76): error C2228: left of '.m_y' must have class/struct/union
+                 type is ''unknown-type''
+     1>c:\users\nicolina\documents\github\programmingproject\project\project\level.cpp(90): warning C4244: 'argument' : conversion from 'unsigned int' to 'float', possible loss of data
+     1>c:\users\nicolina\documents\github\programmingproject\project\project\level.cpp(90): warning C4244: 'argument' : conversion from 'unsigned int' to 'const float', possible loss of data
+     1>c:\users\nicolina\documents\github\programmingproject\project\project\level.cpp(91): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\nicolina\documents\github\programmingproject\project\project\level.cpp(91): warning C4244: 'argument' : conversion from 'int' to 'const float', possible loss of data
+     1>c:\users\nicolina\documents\github\programmingproject\project\project\level.cpp(98): warning C4244: 'argument' : conversion from 'unsigned int' to 'float', possible loss of data
+     1>c:\users\nicolina\documents\github\programmingproject\project\project\level.cpp(98): warning C4244: 'argument' : conversion from 'unsigned int' to 'const float', possible loss of data
+     1>c:\users\nicolina\documents\github\programmingproject\project\project\level.cpp(114): warning C4244: 'argument' : conversion from 'const float' to 'int', possible loss of data
+     1>c:\users\nicolina\documents\github\programmingproject\project\project\level.cpp(135): error C2039: 'GetPlayerStartPosition' : is not a member of 'Level'
+                 c:\users\nicolina\documents\github\programmingproject\project\project\level.h(11) : see declaration of 'Level'
+     1>c:\users\nicolina\documents\github\programmingproject\project\project\level.cpp(136): error C2065: 'm_start_position' : undeclared identifier
          GameObject.cpp
      1>c:\users\nicolina\documents\github\programmingproject\project\project\gameobject.cpp(10): error C2614: 'GameObject' : illegal member initialization: 'm_flag' is not a base or member
      1>c:\users\nicolina\documents\github\programmingproject\project\project\gameobject.cpp(21): warning C4800: 'Sprite *const ' : forcing value to bool 'true' or 'false' (performance warning)
          DuckObject.cpp
-     1>c:\users\nicolina\documents\github\programmingproject\project\project\duckobject.cpp(3): error C2572: 'DuckObject::DuckObject' : redefinition of default parameter : parameter 1
-                 c:\users\nicolina\documents\github\programmingproject\project\project\duckobject.h(12) : see declaration of 'DuckObject::DuckObject'
+         Collider.cpp
+     1>c:\users\nicolina\documents\github\programmingproject\project\project\collider.cpp(2): fatal error C1083: Cannot open include file: 'PlayerObject.h': No such file or directory
          Generating Code...
      1>Done Building Project "C:\Users\Nicolina\Documents\GitHub\ProgrammingProject\Project\Project\Project.vcxproj" (Build target(s)) -- FAILED.
 
 Build FAILED.
 
-Time Elapsed 00:00:00.79
+Time Elapsed 00:00:01.09

@@ -1,6 +1,6 @@
 #include "DuckObject.h"
 
-DuckObject::DuckObject(Sprite* sprite = nullptr) {
+DuckObject::DuckObject(Sprite* sprite) {
 }
 
 void DuckObject::AddAnimation(const std::string &name, Animation *sprite) {
