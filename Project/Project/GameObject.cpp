@@ -24,10 +24,10 @@ GameObject::GameObject(Sprite *sprite, Collider *collider, int flag)
 		return m_sprite;
 	}
 	
-	/*bool GameObject::HasCollider() const{
+	bool GameObject::HasCollider() const{
 		
 		return m_collider != nullptr;
 	}
 	Collider* GameObject::GetCollider(){
 		return m_collider;
-	}*/
+	}
