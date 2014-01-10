@@ -71,10 +71,10 @@ void Engine::Run() {
 		Vector2 offset;
 
 		m_draw_manager->Clear();
-		Sprite* sprite = m_sprite_manager->Load("background3.png", 0, 0, 1024, 960);
-		m_draw_manager->Draw(sprite, 0, 0);
-		sprite = m_sprite_manager->Load("duckhunt_various_sheet2.png", 162, 793, 132, 122);
+		Sprite* sprite = m_sprite_manager->Load("duckhunt_various_sheet2.png", 162, 793, 132, 122);
 		m_draw_manager->Draw(sprite, m_duckPos.m_x, m_duckPos.m_y);
+		sprite = m_sprite_manager->Load("background4.png", 0, 0, 1024, 960);
+		m_draw_manager->Draw(sprite, 0, 0);
 		/*sprite = m_sprite_manager->Load("duck_hunt_sprites3.png", 30, 140, 1024, 354);
 		m_draw_manager->Draw(sprite, 65, 755);*/
 		/*m_draw_manager->Draw(

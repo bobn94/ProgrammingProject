@@ -7,7 +7,7 @@
 #include "DrawManager.h"
 #include <fstream>
 #include <sstream>
-#include "Animation.h"
+#include "AnimatedSprite.h"
 
 SpriteManager::SpriteManager(DrawManager *draw_manager)
 {
@@ -51,7 +51,7 @@ SpriteManager::SpriteManager(DrawManager *draw_manager)
 		}
 		return new Sprite(it->second.surface, it->second.texture, x, y, width, height);
 	}
-Animation* SpriteManager::Load(const std::string &filename){					//code for if/when animation is added
+AnimatedSprite* SpriteManager::Load(const std::string &filename){					//code for if/when animation is added
 		std::ifstream stream;
 		stream.open(filename.c_str());
 		if(!stream.is_open()){
@@ -71,7 +71,7 @@ Animation* SpriteManager::Load(const std::string &filename){					//code for if/w
 		SDL_Surface *surface = it->second.surface;
 		SDL_Texture *texture = it->second.texture;
 
-		Animation *sprite = new Animation(surface, texture, 0, 0, 0, 0);
+		AnimatedSprite *sprite = new AnimatedSprite(surface, texture, 0, 0, 0, 0);
 
 		while(!stream.eof()){
 			std::getline(stream, row);
@@ -80,7 +80,7 @@ Animation* SpriteManager::Load(const std::string &filename){					//code for if/w
 			}
 			std::stringstream ss(row);
 
-			Animation::Frame frame;
+			AnimatedSprite::Frame frame;
 
 			ss >> frame.duration;
 			ss >> frame.x;
