@@ -48,8 +48,8 @@ bool Engine::Initialize() {
 
 	if(m_window == nullptr) { return false; };
 
-	Sprite* sprite = m_sprite_manager->Load("p2_spritesheet.png", 0, 0, 70, 70);
-	m_duck = new DuckObject(sprite);
+	/*Sprite* sprite = m_sprite_manager->Load("p2_spritesheet.png", 0, 0, 70, 70);
+	m_duck = new DuckObject(sprite);*/
 	
 	
 	m_running = true;
@@ -69,8 +69,8 @@ void Engine::Run() {
 		m_draw_manager->Clear();
 		Sprite* sprite = m_sprite_manager->Load("background3.png", 0, 0, 1024, 960);
 		m_draw_manager->Draw(sprite, 0, 0);
-		sprite = m_sprite_manager->Load("duck_hunt_sprites2.png", 40, 200, 1024, 472);
-		m_draw_manager->Draw(sprite, 75, 777);
+		/*sprite = m_sprite_manager->Load("duck_hunt_sprites2.png", 40, 200, 1024, 472);
+		m_draw_manager->Draw(sprite, 75, 777);*/
 		/*m_draw_manager->Draw(
 			m_duck->GetSprite(),
 			m_duck->GetPosition().m_x,
