@@ -25,7 +25,7 @@ DrawManager::DrawManager(){
 		}
 	}
 	void DrawManager::Clear(){
-		SDL_SetRenderDrawColor(m_renderer, 102, 195, 255, 0xff);//Background color
+		SDL_SetRenderDrawColor(m_renderer, 0x11, 0x22, 0xaa, 0xff);//Background color
 		SDL_RenderClear(m_renderer);
 	}
 	void DrawManager::Present(){

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Log.h"
+#include "Vector2.h"
 
 class DrawManager;
 class SpriteManager;
@@ -17,11 +18,12 @@ public:
 	bool Initialize();
 	void Run();
 	void Cleanup();
-
+	
+	bool m_isDuckSpawned;
 private:
 	void UpdateEvents();
 	void UpdateDeltatime();
-
+	void SpawnDuck();
 private:
 	struct SDL_Window *m_window;
 	Level* m_level;
@@ -29,7 +31,7 @@ private:
 	SpriteManager *m_sprite_manager;
 
 	Log m_log;
-
+	
 	bool m_running;
 	int m_width;
 	int m_height;
@@ -38,4 +40,6 @@ private:
 	Collider *m_collider;
 	DuckObject *m_duck;
 	Input *m_input;
+	Vector2 m_duckPos;
+	Vector2 m_duckExt;
 };

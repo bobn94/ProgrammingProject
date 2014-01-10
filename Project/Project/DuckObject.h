@@ -2,26 +2,21 @@
 
 #include <map>
 #include <string>
-#include "AnimatedSprite.h"
+#include "Animation.h"
 #include "GameObject.h"
 
 class Sprite;
 
 class DuckObject : public GameObject {
 public:
-	DuckObject(Sprite* sprite = nullptr, Collider* collider = nullptr);
+	DuckObject(Sprite* sprite/* = nullptr*/);
 
-	void Update(float deltatime);
+	//void Update(float deltatime);
 
-	void AddAnimation(const std::string &name, AnimatedSprite *sprite);
-
-	void CheckCollision(int width);
-
-	float m_dir_x;
-	float m_dir_y;
-
+	void AddAnimation(const std::string &name, Animation *sprite);
 
 protected:
-	AnimatedSprite *m_current_animation;
-	std::map<std::string, AnimatedSprite*> m_animations;
+
+	Animation *m_current_animation;
+	std::map<std::string, Animation*> m_animations;
 };

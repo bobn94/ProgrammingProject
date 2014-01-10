@@ -14,12 +14,11 @@ Level::~Level(){
 	auto it = m_objects.begin();
 	while(it != m_objects.end()){
 		delete (*it)->GetSprite();
-		delete (*it)->GetCollider();
+		//delete (*it)->GetCollider();
 		delete (*it);
 		++it;
 	}
 }
-
 bool Level::Load(const std::string &filename, SpriteManager *sprite_manager){
 	std::ifstream stream(filename);
 	if(!stream.is_open()){

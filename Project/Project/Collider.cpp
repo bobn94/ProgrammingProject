@@ -4,7 +4,7 @@
 
 Collider::Collider()
 	:m_position(0.0f, 0.0f)
-,m_extention(0.0f, 0.0f)
+	,m_extention(0.0f, 0.0f)
 {
 
 }
