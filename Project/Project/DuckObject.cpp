@@ -4,8 +4,13 @@
 #include <cstdlib>
  
 
-DuckObject::DuckObject(Sprite* sprite, Collider* collider)
-: GameObject(sprite, collider)
+float Random(float min, float max) {
+	return min + ((max - min) * ((float)rand() / (float)RAND_MAX));
+};
+
+
+DuckObject::DuckObject(Sprite* sprite, Collider* collider, int flag)
+: GameObject(sprite, collider, flag)
 {
 	srand((unsigned int)time(0));	
 	m_dir_x = 0.0f;
@@ -33,4 +38,39 @@ void DuckObject::CheckCollision(int width) {
 	if (m_position.m_y /*- m_size*/ <= 0 || m_position.m_y /*+ m_size*/ >= 0){ //Grassheight!
 		m_dir_y = -m_dir_y;
 		}
+};
+
+void DuckObject::Randomize() {
+	m_dir_x = Random(-1.0f, 1.0f) * 5.0f;
+	m_dir_y = Random(-1.0f, 1.0f);
+
+	float length = sqrtf(m_dir_x * m_dir_x + m_dir_y * m_dir_y);
+	if (length < 0.0f) {
+		m_dir_x /= length;
+		m_dir_y /= length;
+	}
+	else {
+		m_dir_x = -1.0f;
+		m_dir_y = 1.0f;
+
+		length = sqrtf(m_dir_x * m_dir_x + m_dir_y * m_dir_y);
+		m_dir_x /= length;
+		m_dir_y /= length;
+	};
+};
+
+
+void DuckObject::SpawnDuck(){
+	//m_duckPos.m_x = (float)(rand()%1000 + 24);
+	m_duckPos.m_y = 500;
+	if(!m_isDuckSpawned){
+
+		m_isDuckSpawned = true;
+	}
+	m_spawn_position.m_x = 500;
+	m_spawn_position.m_y = m_duckPos.m_y;
+}
+
+Vector2 DuckObject::GetSpawnPosition() {
+	return m_spawn_position;
 };

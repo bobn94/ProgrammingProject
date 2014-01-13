@@ -20,10 +20,6 @@ public:
 	
 	void Draw(DrawManager *drawmanager);
 	bool CheckCollision(GameObject *object, Vector2 &offset);
-	void SpawnDuck(SpriteManager *sprite_manager);
-	bool m_isDuckSpawned;
-	Vector2 m_duckPos;
-	Vector2 m_duckExt;
 private:
 	std::string m_spritemap_filename;
 	std::map<char, Cords> m_tile_cords;

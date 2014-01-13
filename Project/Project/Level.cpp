@@ -108,24 +108,9 @@ bool Level::CheckCollision(GameObject *object, Vector2 &offset){
 				}
 			}
 		}
-		if(offset.Lenght() > 0.0f){
+		if(offset.Length() > 0.0f){
 			return true;
 		}
 	}
 	return false;
-}
-void Level::SpawnDuck(SpriteManager *sprite_manager){
-	if(!m_isDuckSpawned){
-		m_duckExt.m_x = 132.0f;
-		m_duckExt.m_y = 122.0f;
-		m_duckPos.m_x = (float)(rand()%1000 + 24);
-		m_duckPos.m_y = 500;
-		Sprite *sprite = sprite_manager->Load("duckhunt_various_sheet2.png", 162, 793, 132, 122);
-		Collider *collider = new Collider;
-		collider->m_position = Vector2(m_duckPos);
-		collider->m_extention = Vector2(m_duckExt);
-		GameObject *go = new GameObject(sprite, collider, 1);
-		go->SetPosition(Vector2(m_duckPos));
-		m_isDuckSpawned = true;
-	}
 }

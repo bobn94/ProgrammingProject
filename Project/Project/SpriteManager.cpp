@@ -25,7 +25,7 @@ SpriteManager::SpriteManager(DrawManager *draw_manager)
 		
 		return true;
 	}
-	void SpriteManager::cleanup(){
+	void SpriteManager::Cleanup(){
 		std::map<std::string, Pair>::iterator it = m_sprites.begin();
 		while(it != m_sprites.end()){
 			SDL_FreeSurface(it->second.surface);

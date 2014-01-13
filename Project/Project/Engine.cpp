@@ -52,10 +52,17 @@ bool Engine::Initialize() {
 
 	if(m_window == nullptr) { return false; };
 
-	/*Sprite* sprite = m_sprite_manager->Load("p2_spritesheet.png", 0, 0, 70, 70);
-	m_duck = new DuckObject(sprite);*/
+	Collider* collider = new Collider(
+	Vector2(500.0f, 500.0f), 
+	Vector2(132.0f, 122.0f));
+	Sprite *sprite = m_sprite_manager->Load("duckhunt_various_sheet2.png", 162, 793, 132, 122);
+	m_duck = new DuckObject(sprite, collider, 1);
+	m_duck->SetPosition(Vector2(500.0f, 500.0f));
 	
-	m_level->m_isDuckSpawned = false;
+	/*AnimatedSprite* sprite = m_sprite_manager->Load("../data/animations/player_idle.txt");
+	m_player->AddAnimation("Idle", sprite);*/
+
+	
 	m_running = true;
 	
 	return true;
@@ -65,7 +72,8 @@ void Engine::Run() {
 	while(m_running) {
 		UpdateDeltatime();
 		UpdateEvents();
-		m_level->SpawnDuck(m_sprite_manager);
+
+
 		//keyboard->PostUpdate();
 		//mouse->PostUpdate();
 
@@ -74,17 +82,14 @@ void Engine::Run() {
 		Vector2 offset;
 
 		m_draw_manager->Clear();
-		Sprite* sprite = m_sprite_manager->Load("duckhunt_various_sheet2.png", 162, 793, 132, 122);
-		m_draw_manager->Draw(sprite, m_duckPos.m_x, m_duckPos.m_y);
-		sprite = m_sprite_manager->Load("background4.png", 0, 0, 1024, 960);
+		Sprite* sprite = m_sprite_manager->Load("background4.png", 0, 0, 1024, 960);
 		m_draw_manager->Draw(sprite, 0, 0);
-		/*sprite = m_sprite_manager->Load("duck_hunt_sprites3.png", 30, 140, 1024, 354);
-		m_draw_manager->Draw(sprite, 65, 755);*/
-		/*m_draw_manager->Draw(
+	
+		m_draw_manager->Draw(
 			m_duck->GetSprite(),
 			m_duck->GetPosition().m_x,
 			m_duck->GetPosition().m_y);
-			*/
+			
 		m_draw_manager->Present();
 
 		SDL_Delay(10);
