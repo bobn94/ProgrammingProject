@@ -1,4 +1,5 @@
 #include "DuckObject.h"
+
 #include <ctime>
 #include <cmath>
 #include <cstdlib>
@@ -24,11 +25,11 @@ void DuckObject::Update(float deltatime) {
 	const float speed = 350.0f;
 
 	//m_position.m_x += m_dir_x * deltatime * speed;
-	m_position.m_y += m_dir_y * deltatime * speed;
+	//m_position.m_y += m_dir_y * deltatime * speed;
 
-	/*if(m_current_animation != nullptr) {
+	if(m_current_animation != nullptr) {
 		m_current_animation->Update(deltatime);
-	};*/
+	};
 };
 
 

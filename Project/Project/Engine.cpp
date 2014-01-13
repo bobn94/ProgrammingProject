@@ -55,12 +55,11 @@ bool Engine::Initialize() {
 	Collider* collider = new Collider(
 	Vector2(500.0f, 500.0f), 
 	Vector2(132.0f, 122.0f));
-	Sprite *sprite = m_sprite_manager->Load("duckhunt_various_sheet2.png", 162, 793, 132, 122);
-	m_duck = new DuckObject(sprite, collider, 1);
+	//Sprite *sprite = m_sprite_manager->Load("duckhunt_various_sheet2.png", 162, 793, 132, 122);
+	m_duck = new DuckObject(nullptr, collider, 1);
 	m_duck->SetPosition(Vector2(500.0f, 500.0f));
-	
-	/*AnimatedSprite* sprite = m_sprite_manager->Load("../data/animations/player_idle.txt");
-	m_player->AddAnimation("Idle", sprite);*/
+	AnimatedSprite* sprite = m_sprite_manager->Load("../data/animations/blue_vertical.txt");
+	m_duck->AddAnimation("blue_vertical", sprite);
 
 	
 	m_running = true;
