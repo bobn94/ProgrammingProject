@@ -101,7 +101,7 @@ void Engine::Cleanup() {
 	};*/
 
 	if(m_sprite_manager != nullptr) {
-		m_sprite_manager->cleanup();
+		m_sprite_manager->Cleanup();
 		delete m_sprite_manager;
 		m_sprite_manager = nullptr;
 	};
@@ -150,11 +150,10 @@ void Engine::SpawnDuck(){
 		m_duckExt.m_y = 122.0f;
 		m_duckPos.m_x = (float)(rand()%1000 + 24);
 		m_duckPos.m_y = 500;
-		Sprite *sprite = m_sprite_manager->Load("duckhunt_various_sheet2.png", 162, 793, 132, 122);
 		Collider *collider = new Collider;
 		collider->m_position = Vector2(m_duckPos);
 		collider->m_extention = Vector2(m_duckExt);
-		DuckObject *m_duck = new DuckObject(sprite, collider, 1);
+		DuckObject *m_duck = new DuckObject(nullptr, collider, 1);
 		m_duck->SetPosition(Vector2(m_duckPos));
 		m_isDuckSpawned = true;
 	}

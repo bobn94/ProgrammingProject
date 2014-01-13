@@ -4,6 +4,7 @@
 #include <SDL_image.h>
 #include <string>
 #pragma comment(lib, "sdl2_image.lib")
+
 #include "DrawManager.h"
 #include <fstream>
 #include <sstream>
@@ -25,7 +26,7 @@ SpriteManager::SpriteManager(DrawManager *draw_manager)
 		
 		return true;
 	}
-	void SpriteManager::cleanup(){
+	void SpriteManager::Cleanup(){
 		std::map<std::string, Pair>::iterator it = m_sprites.begin();
 		while(it != m_sprites.end()){
 			SDL_FreeSurface(it->second.surface);
