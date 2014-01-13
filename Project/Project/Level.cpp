@@ -19,7 +19,7 @@ Level::~Level(){
 		++it;
 	}
 }
-bool Level::Load(const std::string &filename, SpriteManager *sprite_manager){
+/*bool Level::Load(const std::string &filename, SpriteManager *sprite_manager){
 	std::ifstream stream(filename);
 	if(!stream.is_open()){
 		return false;
@@ -89,7 +89,7 @@ bool Level::Load(const std::string &filename, SpriteManager *sprite_manager){
 	stream.close();
 
 	return true;
-}
+}*/
 void Level::Draw(DrawManager *drawmanager){
 	for(auto i = 0UL; i < m_objects.size(); i++){
 		drawmanager->Draw(m_objects[i]->GetSprite(), 
@@ -113,4 +113,19 @@ bool Level::CheckCollision(GameObject *object, Vector2 &offset){
 		}
 	}
 	return false;
+}
+void Level::SpawnDuck(SpriteManager *sprite_manager){
+	if(!m_isDuckSpawned){
+		m_duckExt.m_x = 132.0f;
+		m_duckExt.m_y = 122.0f;
+		m_duckPos.m_x = (float)(rand()%1000 + 24);
+		m_duckPos.m_y = 500;
+		Sprite *sprite = sprite_manager->Load("duckhunt_various_sheet2.png", 162, 793, 132, 122);
+		Collider *collider = new Collider;
+		collider->m_position = Vector2(m_duckPos);
+		collider->m_extention = Vector2(m_duckExt);
+		GameObject *go = new GameObject(sprite, collider, 1);
+		go->SetPosition(Vector2(m_duckPos));
+		m_isDuckSpawned = true;
+	}
 }

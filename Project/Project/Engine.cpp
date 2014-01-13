@@ -11,6 +11,7 @@
 #include "Level.h"
 #include "DuckObject.h"
 #include "Engine.h"
+#include "Input.h"
 
 Engine::Engine() : m_log("log.txt") {
 	m_window = nullptr;
@@ -35,7 +36,7 @@ bool Engine::Initialize() {
 	m_height = 960;
 	srand((unsigned int) time(0));
 	SDL_Init(SDL_INIT_EVERYTHING);
-	m_window = SDL_CreateWindow("Duck Hunt", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
+	m_window = SDL_CreateWindow("DuckHunt", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
 		m_width, m_height,
 		SDL_WINDOW_OPENGL);
 
@@ -50,11 +51,13 @@ bool Engine::Initialize() {
 	};
 
 	if(m_window == nullptr) { return false; };
+
+	/*Sprite* sprite = m_sprite_manager->Load("p2_spritesheet.png", 0, 0, 70, 70);
+	m_duck = new DuckObject(sprite);*/
 	
-	
+	m_level->m_isDuckSpawned = false;
 	m_running = true;
 	
-	m_isDuckSpawned = false;
 	return true;
 };
 
@@ -62,12 +65,13 @@ void Engine::Run() {
 	while(m_running) {
 		UpdateDeltatime();
 		UpdateEvents();
-		SpawnDuck();
+		m_level->SpawnDuck(m_sprite_manager);
+		//keyboard->PostUpdate();
+		//mouse->PostUpdate();
 
 		//m_duck->Update(m_deltatime);
-
 	
-		
+		Vector2 offset;
 
 		m_draw_manager->Clear();
 		Sprite* sprite = m_sprite_manager->Load("duckhunt_various_sheet2.png", 162, 793, 132, 122);
@@ -88,30 +92,6 @@ void Engine::Run() {
 };
 
 void Engine::Cleanup() {
-	if(m_duck != nullptr) {
-		delete m_duck->GetSprite();
-		delete m_duck->GetCollider();
-		delete m_duck;
-		m_duck = nullptr;
-	};
-
-	/*if(background != nullptr) {
-		delete background;
-		background = nullptr;
-	};*/
-
-	if(m_sprite_manager != nullptr) {
-		m_sprite_manager->Cleanup();
-		delete m_sprite_manager;
-		m_sprite_manager = nullptr;
-	};
-
-	if(m_draw_manager != nullptr) {
-		m_draw_manager->Cleanup();
-		delete m_draw_manager;
-		m_draw_manager = nullptr;
-	};
-
 	if(m_window != nullptr) {
 		SDL_DestroyWindow(m_window);
 		m_window = nullptr;
@@ -143,18 +123,3 @@ void Engine::UpdateEvents() {
 		}*/
 	};
 };
-
-void Engine::SpawnDuck(){
-	if(!m_isDuckSpawned){
-		m_duckExt.m_x = 132.0f;
-		m_duckExt.m_y = 122.0f;
-		m_duckPos.m_x = (float)(rand()%1000 + 24);
-		m_duckPos.m_y = 500;
-		Collider *collider = new Collider;
-		collider->m_position = Vector2(m_duckPos);
-		collider->m_extention = Vector2(m_duckExt);
-		DuckObject *m_duck = new DuckObject(nullptr, collider, 1);
-		m_duck->SetPosition(Vector2(m_duckPos));
-		m_isDuckSpawned = true;
-	}
-}

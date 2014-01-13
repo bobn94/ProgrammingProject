@@ -17,13 +17,14 @@ public:
 	~SpriteManager();
 
 	bool Initialize(const std::string &directory);
-	void Cleanup();
+	void cleanup();
 	bool LoadImage(std::string &filename);
 	virtual Sprite* Load(const std::string &filename, int x, int y, int width, int height);
 	AnimatedSprite* Load(const std::string &filename);
 private:
 	std::string m_directory;
 	std::string m_filename;
+	AnimatedSprite::Frame m_frame;
 	std::map<std::string,Pair> m_sprites;
 	DrawManager *m_draw_manager;
 };

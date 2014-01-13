@@ -4,15 +4,14 @@
 //#include "Collider.h"
 
 GameObject::GameObject(Sprite *sprite, Collider *collider, int flag)
-: m_position(0.0f, 0.0f)
-,m_sprite(sprite)
+:m_sprite(sprite)
 ,m_collider(collider)
 ,m_flag(flag)
 {
 	
 }
 
-	const Vector2 &GameObject::GetPosition() const {
+	const Vector2 &GameObject::GetPosition(){
 		return m_position;
 	}
 	void GameObject::SetPosition(const Vector2 &position){

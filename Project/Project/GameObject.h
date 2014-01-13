@@ -9,7 +9,7 @@ class GameObject{
 public:
 	GameObject(Sprite *sprite = nullptr, Collider *collider = nullptr, int flag = 0);
 
-	const Vector2 &GetPosition() const;
+	const Vector2 &GetPosition();
 	void SetPosition(const Vector2 &position);
 	bool HasSprite() const;
 	Sprite* GetSprite();

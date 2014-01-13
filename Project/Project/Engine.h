@@ -19,17 +19,17 @@ public:
 	void Run();
 	void Cleanup();
 	
-	bool m_isDuckSpawned;
+	
 private:
 	void UpdateEvents();
 	void UpdateDeltatime();
-	void SpawnDuck();
 private:
 	struct SDL_Window *m_window;
 	Level* m_level;
 	DrawManager *m_draw_manager;
 	SpriteManager *m_sprite_manager;
-
+	//KeyBoard *keyboard;
+	//Mouse *mouse;
 	Log m_log;
 	
 	bool m_running;
