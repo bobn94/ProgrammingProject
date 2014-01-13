@@ -4,8 +4,8 @@
 #include <cstdlib>
  
 
-DuckObject::DuckObject(Sprite* sprite, Collider* collider)
-: GameObject(sprite, collider)
+DuckObject::DuckObject(Sprite* sprite, Collider* collider, int flag)
+: GameObject(sprite, collider, flag)
 {
 	srand((unsigned int)time(0));	
 	m_dir_x = 0.0f;
@@ -14,9 +14,11 @@ DuckObject::DuckObject(Sprite* sprite, Collider* collider)
 
 
 void DuckObject::Update(float deltatime) {
-	if(m_current_animation != nullptr) {
+	const float speed = 200.0f;
+	m_position.m_y = deltatime * speed;
+/*	if(m_current_animation != nullptr) {
 		m_current_animation->Update(deltatime);
-	};
+	};*/
 };
 
 

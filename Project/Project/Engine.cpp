@@ -35,7 +35,7 @@ bool Engine::Initialize() {
 	m_height = 960;
 	srand((unsigned int) time(0));
 	SDL_Init(SDL_INIT_EVERYTHING);
-	m_window = SDL_CreateWindow("DuckHunt", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
+	m_window = SDL_CreateWindow("Duck Hunt", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
 		m_width, m_height,
 		SDL_WINDOW_OPENGL);
 
@@ -50,9 +50,6 @@ bool Engine::Initialize() {
 	};
 
 	if(m_window == nullptr) { return false; };
-
-	Sprite* sprite = m_sprite_manager->Load("p2_spritesheet.png", 0, 0, 70, 70);
-	m_duck = new DuckObject(sprite);
 	
 	
 	m_running = true;
@@ -66,9 +63,11 @@ void Engine::Run() {
 		UpdateDeltatime();
 		UpdateEvents();
 		SpawnDuck();
+
 		//m_duck->Update(m_deltatime);
+
 	
-		Vector2 offset;
+		
 
 		m_draw_manager->Clear();
 		Sprite* sprite = m_sprite_manager->Load("duckhunt_various_sheet2.png", 162, 793, 132, 122);
@@ -89,6 +88,30 @@ void Engine::Run() {
 };
 
 void Engine::Cleanup() {
+	if(m_duck != nullptr) {
+		delete m_duck->GetSprite();
+		delete m_duck->GetCollider();
+		delete m_duck;
+		m_duck = nullptr;
+	};
+
+	/*if(background != nullptr) {
+		delete background;
+		background = nullptr;
+	};*/
+
+	if(m_sprite_manager != nullptr) {
+		m_sprite_manager->cleanup();
+		delete m_sprite_manager;
+		m_sprite_manager = nullptr;
+	};
+
+	if(m_draw_manager != nullptr) {
+		m_draw_manager->Cleanup();
+		delete m_draw_manager;
+		m_draw_manager = nullptr;
+	};
+
 	if(m_window != nullptr) {
 		SDL_DestroyWindow(m_window);
 		m_window = nullptr;
@@ -131,8 +154,8 @@ void Engine::SpawnDuck(){
 		Collider *collider = new Collider;
 		collider->m_position = Vector2(m_duckPos);
 		collider->m_extention = Vector2(m_duckExt);
-		GameObject *go = new GameObject(sprite, collider, 1);
-		go->SetPosition(Vector2(m_duckPos));
+		DuckObject *m_duck = new DuckObject(sprite, collider, 1);
+		m_duck->SetPosition(Vector2(m_duckPos));
 		m_isDuckSpawned = true;
 	}
 }
