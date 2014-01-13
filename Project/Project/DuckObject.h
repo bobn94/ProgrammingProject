@@ -15,7 +15,7 @@ public:
 
 	void AddAnimation(const std::string &name, AnimatedSprite *sprite);
  
-	void CheckCollision(int width);
+	void CheckCollision(int width, int height);
 
 	void Randomize();
 

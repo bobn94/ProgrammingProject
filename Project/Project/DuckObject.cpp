@@ -19,9 +19,16 @@ DuckObject::DuckObject(Sprite* sprite, Collider* collider, int flag)
 
 
 void DuckObject::Update(float deltatime) {
-	if(m_current_animation != nullptr) {
+	Randomize();
+	
+	const float speed = 350.0f;
+
+	//m_position.m_x += m_dir_x * deltatime * speed;
+	m_position.m_y += m_dir_y * deltatime * speed;
+
+	/*if(m_current_animation != nullptr) {
 		m_current_animation->Update(deltatime);
-	};
+	};*/
 };
 
 
@@ -34,8 +41,8 @@ void DuckObject::AddAnimation(const std::string &name, AnimatedSprite *sprite) {
 };
 
 
-void DuckObject::CheckCollision(int width) {
-	if (m_position.m_y /*- m_size*/ <= 0 || m_position.m_y /*+ m_size*/ >= 0){ //Grassheight!
+void DuckObject::CheckCollision(int width, int height) {
+	if (m_position.m_y - 132.0f <= 500 || m_position.m_y + 132.0f >= height){
 		m_dir_y = -m_dir_y;
 		}
 };
@@ -50,8 +57,8 @@ void DuckObject::Randomize() {
 		m_dir_y /= length;
 	}
 	else {
-		m_dir_x = -1.0f;
-		m_dir_y = 1.0f;
+		m_dir_x = 1.0f;
+		m_dir_y = -1.0f;
 
 		length = sqrtf(m_dir_x * m_dir_x + m_dir_y * m_dir_y);
 		m_dir_x /= length;

@@ -36,7 +36,7 @@ bool Engine::Initialize() {
 	m_height = 960;
 	srand((unsigned int) time(0));
 	SDL_Init(SDL_INIT_EVERYTHING);
-	m_window = SDL_CreateWindow("DuckHunt", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
+	m_window = SDL_CreateWindow("Duck Hunt", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
 		m_width, m_height,
 		SDL_WINDOW_OPENGL);
 
@@ -72,23 +72,23 @@ void Engine::Run() {
 	while(m_running) {
 		UpdateDeltatime();
 		UpdateEvents();
-
-
 		//keyboard->PostUpdate();
 		//mouse->PostUpdate();
-
-		//m_duck->Update(m_deltatime);
+		m_duck->Update(m_deltatime);
+		
 	
-		Vector2 offset;
+		m_duck->CheckCollision(m_width, m_height);
 
 		m_draw_manager->Clear();
-		Sprite* sprite = m_sprite_manager->Load("background4.png", 0, 0, 1024, 960);
-		m_draw_manager->Draw(sprite, 0, 0);
-	
+
 		m_draw_manager->Draw(
 			m_duck->GetSprite(),
 			m_duck->GetPosition().m_x,
 			m_duck->GetPosition().m_y);
+
+		
+		Sprite* sprite = m_sprite_manager->Load("background4.png", 0, 0, 1024, 960);
+		m_draw_manager->Draw(sprite, 0, 0);
 			
 		m_draw_manager->Present();
 
