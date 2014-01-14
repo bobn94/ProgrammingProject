@@ -9,7 +9,7 @@ class Sprite;
  
 class DuckObject : public GameObject {
 public:
-	DuckObject(Sprite* sprite = nullptr, Collider* collider = nullptr, int flag = 0);
+	DuckObject(Sprite* sprite = nullptr, Collider* collider = nullptr);
 
 	void Update(float deltatime);
 

@@ -3,11 +3,10 @@
 #include "GameObject.h"
 //#include "Collider.h"
 
-GameObject::GameObject(Sprite *sprite, Collider *collider, int flag)
+GameObject::GameObject(Sprite *sprite, Collider *collider)
 :m_position(0.0f, 0.0f)
 ,m_sprite(sprite)
 ,m_collider(collider)
-,m_flag(flag)
 {
 	
 }

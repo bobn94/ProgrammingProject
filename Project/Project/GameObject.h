@@ -6,8 +6,9 @@ class Collider;
 class Sprite;
 
 class GameObject{
+	friend class Level;
 public:
-	GameObject(Sprite *sprite = nullptr, Collider *collider = nullptr, int flag = 0);
+	GameObject(Sprite *sprite = nullptr, Collider *collider = nullptr);
 
 	const Vector2 &GetPosition() const;
 	void SetPosition(const Vector2 &position);

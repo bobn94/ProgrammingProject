@@ -10,10 +10,10 @@ float Random(float min, float max) {
 };
 
 
-DuckObject::DuckObject(Sprite* sprite, Collider* collider, int flag)
-: GameObject(sprite, collider, flag)
+DuckObject::DuckObject(Sprite* sprite, Collider* collider)
+: GameObject(sprite, collider)
 {
-	srand((unsigned int)time(0));	
+	//srand((unsigned int)time(0));	 seedar i Engine::Initzialize, koden överflödig
 	m_dir_x = 0.0f;
 	m_dir_y = 0.0f;
 };
