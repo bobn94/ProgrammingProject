@@ -90,7 +90,6 @@
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="Log.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="MenuState.cpp" />
     <ClCompile Include="MusicClip.cpp" />
     <ClCompile Include="SoundClip.cpp" />
     <ClCompile Include="SoundManager.cpp" />

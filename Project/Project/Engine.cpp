@@ -60,20 +60,26 @@ bool Engine::Initialize() {
 	Vector2(500.0f, 500.0f), 
 	Vector2(132.0f, 122.0f));
 	m_duck = new DuckObject(nullptr, collider);
-	m_duck->SetPosition(Vector2(500.0f/*, 660.0f*/, 400.0f));
+	m_duck->SetPosition(Vector2(500.0f, 400.0f));
+
 	AnimatedSprite* sprite = m_sprite_manager->Load("../data/animations/blue_horizontal.txt");
 	m_duck->AddAnimation("blue_horizontal", sprite);
+	
+	sprite = m_sprite_manager->Load("../data/animations/blue_vertical.txt");
+	m_duck->AddingAnimation("blue_vertical", sprite);
 
-	/*if (m_duck->m_dir_y > -1 && m_duck->m_dir_x = 0) {
-		AnimatedSprite* sprite = m_sprite_manager->Load("../data/animations/blue_vertical.txt");
-		m_duck->AddAnimation("blue_vertical", sprite);
-	} else if (m_duck) {
-		AnimatedSprite* sprite = m_sprite_manager->Load("../data/animations/blue_diagonal.txt");
-		m_duck->AddAnimation("blue_vertical", sprite);
-	}
-	else{AnimatedSprite* sprite = m_sprite_manager->Load("../data/animations/blue_horizontal.txt");
-		m_duck->AddAnimation("blue_horizontal", sprite);
-	}*/
+	sprite = m_sprite_manager->Load("../data/animations/blue_diagonal.txt");
+	m_duck->AddingAnimation("blue_diagonal", sprite);
+
+	sprite = m_sprite_manager->Load("../data/animations/blue_death.txt");
+	m_duck->AddingAnimation("blue_death", sprite);
+
+
+	//660.0f
+	
+	/*SDL_RendererFlip flipType = SDL_FLIP_NONE;
+	flipType = SDL_FLIP_HORIZONTAL;*/
+
 
 	m_level = new Level;
 	m_level->ChangeAmmo(true, 3); //ChangeAmmo(true, 3) - sätter ammo till 3, ChangeAmmo(false, 3) - ökar ammon med 3
@@ -96,6 +102,7 @@ void Engine::Run() {
 		m_duck->Update(m_deltatime);
 		m_level->UppdateCrosshair();	
 
+		m_duck->GetAngle();
 
 		m_draw_manager->Clear();
 		
@@ -103,8 +110,11 @@ void Engine::Run() {
 			m_duck->GetSprite(),
 			m_duck->GetPosition().m_x,
 			m_duck->GetPosition().m_y);
+
+
+		//std::cout << m_duck->m_angle << std::endl;
 		
-		
+
 		Sprite* sprite = m_sprite_manager->Load("background4.png", 0, 0, 1024, 960);
 		m_draw_manager->Draw(sprite, 0, 0);
 
