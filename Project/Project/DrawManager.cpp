@@ -2,8 +2,10 @@
 #include "Sprite.h"
 #include "DrawManager.h"
 #include <SDL.h>
+#include <SDL_ttf.h>
 #pragma comment(lib, "sdl2.lib")
 #pragma comment(lib, "sdl2main.lib")
+#pragma comment(lib, "SDL2_ttf.lib")
 DrawManager::DrawManager(){
 	m_renderer = nullptr;
 }
@@ -36,3 +38,11 @@ DrawManager::DrawManager(){
 		SDL_Rect dst = { x, y, sprite->m_width, sprite->m_height};
 		SDL_RenderCopy(m_renderer, sprite->m_texture, &src, &dst);
 	}
+	void DrawManager::Draw(SDL_Surface* surface, int x, int y)
+{
+    SDL_Rect src = surface->clip_rect;
+    SDL_Rect dst = { x, y, surface->w, surface->h};
+    SDL_Texture* texture = SDL_CreateTextureFromSurface(m_renderer, surface);
+    SDL_RenderCopy(m_renderer, texture, &src, &dst);
+    SDL_DestroyTexture(texture);
+}
