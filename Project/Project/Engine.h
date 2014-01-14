@@ -19,7 +19,8 @@ public:
 	void Run();
 	void Cleanup();
 	
-	
+	//KeyBoard* m_keyboard;
+	//Mouse* m_mouse;
 private:
 	void UpdateEvents();
 	void UpdateDeltatime();
@@ -28,8 +29,7 @@ private:
 	Level* m_level;
 	DrawManager *m_draw_manager;
 	SpriteManager *m_sprite_manager;
-	//KeyBoard *keyboard;
-	//Mouse *mouse;
+	
 	Log m_log;
 	
 	bool m_running;

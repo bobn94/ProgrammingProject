@@ -1,9 +1,12 @@
 #include <SDL.h>
+#include <SDL_ttf.h>
 #include <iostream>
 #include <cmath>
 #include <ctime>
+#include <sstream>
 #pragma comment (lib, "sdl2.lib")
 #pragma comment(lib, "sdl2main.lib")
+#pragma comment(lib, "SDL2_ttf.lib")
 
 #include "DrawManager.h"
 #include "SpriteManager.h"
@@ -15,10 +18,11 @@
 
 Engine::Engine() : m_log("log.txt") {
 	m_window = nullptr;
-
+	m_level = nullptr;
 	m_draw_manager = nullptr;
 	m_sprite_manager = nullptr;
-
+	//m_mouse = nullptr;
+	//m_keyboard = nullptr;
 	m_running = false;
 	m_width = 0;
 	m_height = 0;
@@ -55,13 +59,18 @@ bool Engine::Initialize() {
 	Collider* collider = new Collider(
 	Vector2(500.0f, 500.0f), 
 	Vector2(132.0f, 122.0f));
-	//Sprite *sprite = m_sprite_manager->Load("duckhunt_various_sheet2.png", 162, 793, 132, 122);
-	m_duck = new DuckObject(nullptr, collider, 1);
+	
+	m_duck = new DuckObject(nullptr, collider);
 	m_duck->SetPosition(Vector2(500.0f, 500.0f));
 	AnimatedSprite* sprite = m_sprite_manager->Load("../data/animations/blue_vertical.txt");
 	m_duck->AddAnimation("blue_vertical", sprite);
 
-	
+	m_level = new Level;
+	m_level->ChangeAmmo(true, 3); //ChangeAmmo(true, 3) - sätter ammo till 3, ChangeAmmo(false, 3) - ökar ammon med 3
+	m_level->SetScore(0);
+	m_level->SpawnCrosshair(m_sprite_manager);
+	TTF_Init();
+	SDL_ShowCursor( SDL_DISABLE );
 	m_running = true;
 	
 	return true;
@@ -71,24 +80,52 @@ void Engine::Run() {
 	while(m_running) {
 		UpdateDeltatime();
 		UpdateEvents();
-		//keyboard->PostUpdate();
-		//mouse->PostUpdate();
-		m_duck->Update(m_deltatime);
 		
+
+		m_duck->Update(m_deltatime);
+		m_level->UppdateCrosshair();
 	
 		m_duck->CheckCollision(m_width, m_height);
 
 		m_draw_manager->Clear();
-
+		
 		m_draw_manager->Draw(
 			m_duck->GetSprite(),
 			m_duck->GetPosition().m_x,
 			m_duck->GetPosition().m_y);
-
+		
 		
 		Sprite* sprite = m_sprite_manager->Load("background4.png", 0, 0, 1024, 960);
 		m_draw_manager->Draw(sprite, 0, 0);
-			
+
+		if(m_level->m_ammo == 3){					//Kollar vilken ammo bild som ska visas
+			sprite = m_sprite_manager->Load("AmmoIs3.png", 0, 0, 116, 84);	
+			m_draw_manager->Draw(sprite, 83, 818);
+		}
+		else if(m_level->m_ammo == 2){
+			sprite = m_sprite_manager->Load("AmmoIs2.png", 0, 0, 116, 84);
+			m_draw_manager->Draw(sprite, 83, 818);
+		}
+		else if(m_level->m_ammo == 1){
+			sprite = m_sprite_manager->Load("AmmoIs1.png", 0, 0, 116, 84);
+			m_draw_manager->Draw(sprite, 83, 818);
+		}
+		else{
+			sprite = m_sprite_manager->Load("AmmoIs0.png", 0, 0, 116, 84);
+			m_draw_manager->Draw(sprite, 83, 818);
+		}
+		
+		std::stringstream strm;		
+		strm << m_level->m_score;		//Gör om m_score till en mer utskriftsvänlig version.
+		SDL_Color foregroundColor = { 255, 255, 255 };		//Sätter Textfärg till vit
+		SDL_Color backgroundColor = { 0, 0, 0 };			//sätter Bakgrundsfärg till svart
+		TTF_Font* font = TTF_OpenFont("../data/fonts/ariblk.ttf", 20);	//Berättar att vi ska använda ariblk som ligger i ../data/fonts/, och använda den med storlek 20.
+		SDL_Surface* screen = TTF_RenderText_Shaded(font, strm.str().c_str(), foregroundColor, backgroundColor);
+		m_draw_manager->Draw(screen, 765, 830);
+		screen = TTF_RenderText_Shaded(font, "Score", foregroundColor, backgroundColor);	//Skriver ut Score
+		m_draw_manager->Draw(screen, 765, 860);												//Vid Pixlarna 765, 860
+
+		m_level->Draw(m_draw_manager);
 		m_draw_manager->Present();
 
 		SDL_Delay(10);
@@ -100,6 +137,7 @@ void Engine::Cleanup() {
 		SDL_DestroyWindow(m_window);
 		m_window = nullptr;
 	};
+	TTF_Quit();
 };
 
 
@@ -119,11 +157,12 @@ void Engine::UpdateEvents() {
 		if(event.type == SDL_QUIT) {
 			m_running = false;
 		}
-		/*if(event.type == SDL_MOUSEBUTTONDOWN){
-			if(m_level->CheckCollision(m_player, offset)){
-				m_player->SetPosition(offset + m_player->GetPosition());
+		if(event.type == SDL_MOUSEBUTTONDOWN){
+			Vector2 offset;
+			if(m_level->CheckCollision(m_duck, offset)){
+				//m_duck->SetPosition(offset + m_duck->GetPosition());
 				
 			}
-		}*/
+		}
 	};
 };
