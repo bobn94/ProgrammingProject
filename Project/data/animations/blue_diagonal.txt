@@ -1,3 +1,5 @@
-duckhunt_various_sheet.png
-0.1 0 0 73 93
-0.1 
+duckhunt_various_sheet2.png
+0.5 0 628 128 124
+0.5 160 632 128 124
+0.5 316 632 128 124
+0.5 160 632 128 124

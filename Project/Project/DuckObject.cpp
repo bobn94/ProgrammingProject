@@ -3,7 +3,7 @@
 #include <ctime>
 #include <cmath>
 #include <cstdlib>
- 
+#include <iostream>
 
 float Random(float min, float max) {
 	return min + ((max - min) * ((float)rand() / (float)RAND_MAX));
@@ -12,24 +12,27 @@ float Random(float min, float max) {
 
 DuckObject::DuckObject(Sprite* sprite, Collider* collider)
 : GameObject(sprite, collider)
-{
-	//srand((unsigned int)time(0));	 seedar i Engine::Initzialize, koden överflödig
+{	
+	srand((unsigned int) time(0));
+
 	m_dir_x = 0.0f;
 	m_dir_y = 0.0f;
 };
 
 
 void DuckObject::Update(float deltatime) {
-	Randomize();
 	
 	const float speed = 350.0f;
 
-	//m_position.m_x += m_dir_x * deltatime * speed;
-	//m_position.m_y += m_dir_y * deltatime * speed;
+
+	m_position.m_x += m_dir_x * deltatime * speed;
+	m_position.m_y += m_dir_y * deltatime * speed;
+
+	
 
 	if(m_current_animation != nullptr) {
 		m_current_animation->Update(deltatime);
-	};
+		};
 };
 
 
@@ -43,9 +46,16 @@ void DuckObject::AddAnimation(const std::string &name, AnimatedSprite *sprite) {
 
 
 void DuckObject::CheckCollision(int width, int height) {
-	if (m_position.m_y - 132.0f <= 500 || m_position.m_y + 132.0f >= height){
+	if (m_position.m_y - 15.5f <= 0 || m_position.m_y >= 661){
 		m_dir_y = -m_dir_y;
-		}
+	} else if (m_position.m_x - 16.0f <= 0 || m_position.m_x + 128.0f>= width){
+		m_dir_x = -m_dir_x;
+	};
+};
+
+void DuckObject::SwitchDirections() {
+	m_dir_x = Random(-1.0f, 1.0f) * 5.0f;
+	m_dir_y = Random(-1.0f, 1.0f);
 };
 
 void DuckObject::Randomize() {

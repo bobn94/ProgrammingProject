@@ -17,6 +17,8 @@ public:
  
 	void CheckCollision(int width, int height);
 
+	void SwitchDirections();
+
 	void Randomize();
 
 	float m_dir_x;

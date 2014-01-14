@@ -38,7 +38,7 @@ Engine::~Engine() {
 bool Engine::Initialize() {
 	m_width = 1024;
 	m_height = 960;
-	srand((unsigned int) time(0));
+	
 	SDL_Init(SDL_INIT_EVERYTHING);
 	m_window = SDL_CreateWindow("Duck Hunt", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
 		m_width, m_height,
@@ -59,11 +59,21 @@ bool Engine::Initialize() {
 	Collider* collider = new Collider(
 	Vector2(500.0f, 500.0f), 
 	Vector2(132.0f, 122.0f));
-	
 	m_duck = new DuckObject(nullptr, collider);
-	m_duck->SetPosition(Vector2(500.0f, 500.0f));
-	AnimatedSprite* sprite = m_sprite_manager->Load("../data/animations/blue_vertical.txt");
-	m_duck->AddAnimation("blue_vertical", sprite);
+	m_duck->SetPosition(Vector2(500.0f/*, 660.0f*/, 400.0f));
+	AnimatedSprite* sprite = m_sprite_manager->Load("../data/animations/blue_horizontal.txt");
+	m_duck->AddAnimation("blue_horizontal", sprite);
+
+	/*if (m_duck->m_dir_y > -1 && m_duck->m_dir_x = 0) {
+		AnimatedSprite* sprite = m_sprite_manager->Load("../data/animations/blue_vertical.txt");
+		m_duck->AddAnimation("blue_vertical", sprite);
+	} else if (m_duck) {
+		AnimatedSprite* sprite = m_sprite_manager->Load("../data/animations/blue_diagonal.txt");
+		m_duck->AddAnimation("blue_vertical", sprite);
+	}
+	else{AnimatedSprite* sprite = m_sprite_manager->Load("../data/animations/blue_horizontal.txt");
+		m_duck->AddAnimation("blue_horizontal", sprite);
+	}*/
 
 	m_level = new Level;
 	m_level->ChangeAmmo(true, 3); //ChangeAmmo(true, 3) - sätter ammo till 3, ChangeAmmo(false, 3) - ökar ammon med 3
@@ -77,15 +87,15 @@ bool Engine::Initialize() {
 };
 
 void Engine::Run() {
+	m_duck->Randomize();
+
 	while(m_running) {
 		UpdateDeltatime();
 		UpdateEvents();
-		
-
-		m_duck->Update(m_deltatime);
-		m_level->UppdateCrosshair();
-	
 		m_duck->CheckCollision(m_width, m_height);
+		m_duck->Update(m_deltatime);
+		m_level->UppdateCrosshair();	
+
 
 		m_draw_manager->Clear();
 		
@@ -99,19 +109,19 @@ void Engine::Run() {
 		m_draw_manager->Draw(sprite, 0, 0);
 
 		if(m_level->m_ammo == 3){					//Kollar vilken ammo bild som ska visas
-			sprite = m_sprite_manager->Load("AmmoIs3.png", 0, 0, 116, 84);	
+			sprite = m_sprite_manager->Load("AmmoIs3_2.png", 0, 0, 116, 84);	
 			m_draw_manager->Draw(sprite, 83, 818);
 		}
 		else if(m_level->m_ammo == 2){
-			sprite = m_sprite_manager->Load("AmmoIs2.png", 0, 0, 116, 84);
+			sprite = m_sprite_manager->Load("AmmoIs2_2.png", 0, 0, 116, 84);
 			m_draw_manager->Draw(sprite, 83, 818);
 		}
 		else if(m_level->m_ammo == 1){
-			sprite = m_sprite_manager->Load("AmmoIs1.png", 0, 0, 116, 84);
+			sprite = m_sprite_manager->Load("AmmoIs1_2.png", 0, 0, 116, 84);
 			m_draw_manager->Draw(sprite, 83, 818);
 		}
 		else{
-			sprite = m_sprite_manager->Load("AmmoIs0.png", 0, 0, 116, 84);
+			sprite = m_sprite_manager->Load("AmmoIs0_2.png", 0, 0, 116, 84);
 			m_draw_manager->Draw(sprite, 83, 818);
 		}
 		
@@ -119,7 +129,7 @@ void Engine::Run() {
 		strm << m_level->m_score;		//Gör om m_score till en mer utskriftsvänlig version.
 		SDL_Color foregroundColor = { 255, 255, 255 };		//Sätter Textfärg till vit
 		SDL_Color backgroundColor = { 0, 0, 0 };			//sätter Bakgrundsfärg till svart
-		TTF_Font* font = TTF_OpenFont("../data/fonts/ariblk.ttf", 20);	//Berättar att vi ska använda ariblk som ligger i ../data/fonts/, och använda den med storlek 20.
+		TTF_Font* font = TTF_OpenFont("../data/fonts/emulogic.ttf", 25);	//Berättar att vi ska använda ariblk som ligger i ../data/fonts/, och använda den med storlek 20.
 		SDL_Surface* screen = TTF_RenderText_Shaded(font, strm.str().c_str(), foregroundColor, backgroundColor);
 		m_draw_manager->Draw(screen, 765, 830);
 		screen = TTF_RenderText_Shaded(font, "Score", foregroundColor, backgroundColor);	//Skriver ut Score
