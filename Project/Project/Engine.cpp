@@ -155,11 +155,11 @@ void Engine::Run() {
 		int duckPos_x = 362;
 		for(int i = 0; i <= 9; ++i){
 			if(m_level->m_ducksHit[i] == 'R'){
-				sprite = m_sprite_manager->Load("RedDuck.png", 0, 0, 34, 31);	
+				sprite = m_sprite_manager->Load("RedDuck.png", 0, 0, 28, 28);	
 				m_draw_manager->Draw(sprite,duckPos_x + (i * 34), 837);
 			}
 			else if(m_level->m_ducksHit[i] == 'W'){
-				sprite = m_sprite_manager->Load("WhiteDuck.png", 0, 0, 34, 31);	
+				sprite = m_sprite_manager->Load("WhiteDuck.png", 0, 0, 28, 28);	
 				m_draw_manager->Draw(sprite,duckPos_x + (i * 34), 837);
 			}
 		}
