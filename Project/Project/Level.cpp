@@ -46,27 +46,24 @@ bool Level::CheckCollision(GameObject *object, Vector2 &offset){
 					}
 				}
 			}
-			
 			if(offset.Length() > 0.0f){
-
 				m_score += 100;
 			return true;
 			}
-			
 		}
-		if(m_ammo == 0){
-			m_ducksHit[m_currentDuck] = 'R';
-			
-				if(m_currentDuck == 9){
-					m_currentDuck = 0;
-				}
-				else{
-					m_currentDuck += 1;
-				}
+			if(m_ammo == 0){
+				m_ducksHit[m_currentDuck] = 'R';
+
+			if(m_currentDuck == 9){
+				m_currentDuck = 0;
+			}
+			else{
+				m_currentDuck += 1;
+			}
+
 		}
 		return false;
 	}
-	
 }
 void Level::SpawnCrosshair(SpriteManager *sprite_manager){
 	Sprite *sprite = sprite_manager->Load("crosshair.png", 0, 0, 32, 32);
@@ -79,7 +76,7 @@ void Level::SpawnCrosshair(SpriteManager *sprite_manager){
 	
 }
 
-void Level::UppdateCrosshair(){
+void Level::UpdateCrosshair(){
 	int x, y;
 	SDL_GetMouseState(&x, &y);
 	m_crosshairPos.m_x = x -16;

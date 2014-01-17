@@ -9,7 +9,6 @@ class Sprite{
 
 public:
 	Sprite(SDL_Surface *surface, SDL_Texture *texture, int x, int y, int width, int height);
-
 protected:
 	SDL_Surface *m_surface;
 	SDL_Texture *m_texture;

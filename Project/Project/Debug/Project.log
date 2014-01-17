@@ -1,9 +1,17 @@
-﻿Build started 2014-01-14 22:16:36.
-     1>Project "C:\Users\Nicolina\Documents\GitHub\ProgrammingProject\Project\Project\Project.vcxproj" on node 2 (Build target(s)).
+﻿Build started 2014-01-17 15:40:21.
+     1>Project "C:\Users\Nicolina\Documents\Blaaah\Project\Project\Project.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I../dependencies/sdl2/include /I../dependencies/sdl2_image/include /I../dependencies/sdl2_mixer/include /I../dependencies/SDL2_ttf/include /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt DuckObject.cpp
-         DuckObject.cpp
-     1>c:\users\nicolina\documents\github\programmingproject\project\project\duckobject.cpp(101): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I../dependencies/sdl2/include /I../dependencies/sdl2_image/include /I../dependencies/sdl2_mixer/include /I../dependencies/SDL2_ttf/include /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt Engine.cpp Level.cpp
+         Level.cpp
+     1>c:\users\nicolina\documents\blaaah\project\project\level.cpp(29): warning C4244: 'argument' : conversion from 'const float' to 'int', possible loss of data
+     1>c:\users\nicolina\documents\blaaah\project\project\level.cpp(82): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\nicolina\documents\blaaah\project\project\level.cpp(83): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\nicolina\documents\blaaah\project\project\level.cpp(85): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\nicolina\documents\blaaah\project\project\level.cpp(86): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+         Engine.cpp
+     1>c:\users\nicolina\documents\blaaah\project\project\engine.cpp(114): warning C4244: 'argument' : conversion from 'const float' to 'int', possible loss of data
+         Generating Code...
+     1>c:\users\nicolina\documents\blaaah\project\project\level.cpp(67): warning C4715: 'Level::CheckCollision' : not all control paths return a value
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"../bin/Project.exe" /INCREMENTAL /NOLOGO /LIBPATH:../dependencies/sdl2/lib/x86 /LIBPATH:../dependencies/sdl2_image/lib/x86 /LIBPATH:../dependencies/sdl2_mixer/lib/x86 /LIBPATH:../dependencies\SDL2_ttf\lib\x86 sdl2.lib sdl2_mixer.lib sdl2_image.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"../bin/Project.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"../bin/Project.lib" /MACHINE:X86 Debug\AnimatedSprite.obj
          Debug\Collider.obj
@@ -11,20 +19,24 @@
          Debug\DuckObject.obj
          Debug\Engine.obj
          Debug\GameObject.obj
+         Debug\GameStateA.obj
+         Debug\GameStateB.obj
          Debug\Input.obj
          Debug\Level.obj
          Debug\Log.obj
          Debug\main.obj
+         Debug\MenuState.obj
          Debug\MusicClip.obj
+         Debug\OptionsState.obj
          Debug\SoundClip.obj
          Debug\SoundManager.obj
          Debug\Sprite.obj
          Debug\SpriteManager.obj
          Debug\StateManager.obj
          Debug\Vector2.obj
-         Project.vcxproj -> C:\Users\Nicolina\Documents\GitHub\ProgrammingProject\Project\Project\../bin/Project.exe
-     1>Done Building Project "C:\Users\Nicolina\Documents\GitHub\ProgrammingProject\Project\Project\Project.vcxproj" (Build target(s)).
+         Project.vcxproj -> C:\Users\Nicolina\Documents\Blaaah\Project\Project\../bin/Project.exe
+     1>Done Building Project "C:\Users\Nicolina\Documents\Blaaah\Project\Project\Project.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:01.15
+Time Elapsed 00:00:01.73

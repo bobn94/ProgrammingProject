@@ -18,7 +18,7 @@ public:
 	Level();
 	~Level();
 	void SpawnCrosshair(SpriteManager *sprite_manager);
-	void UppdateCrosshair();
+	void UpdateCrosshair();
 	void Draw(DrawManager *drawmanager);
 	bool CheckCollision(GameObject *object, Vector2 &offset);
 	void ChangeAmmo(bool set, int value);
@@ -35,6 +35,7 @@ private:
 	int m_flag;
 	int m_ammo;
 	int m_score;
+
 	char m_ducksHit[10];
 	int m_currentDuck;
 };

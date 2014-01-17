@@ -15,31 +15,39 @@ public:
 
 	void Update(float deltatime);
 
+	void setCurrentAnimation();
+
 	void AddAnimation(const std::string &name, AnimatedSprite *sprite);
 
 	void AddingAnimation(const std::string &name, AnimatedSprite *sprite);
 
-	void CheckCollision(int width, int height);
+	void CheckCollision();
 
-	void SwitchDirections();
-
-	void GetAngle();
-
-	void setCurrentAnimation();
+	void ChangeDirections();
 
 	void Randomize();
 
 	float m_dir_x;
 	float m_dir_y;
 	float m_angle;
-	SpriteManager *_sprite_manager;
+
+	float speed;
+
+	int m_duckType;
 
 	void SpawnDuck();
 	bool m_isDuckSpawned;
 	Vector2 m_duckPos;
-	Vector2 m_duckExt;
+
+	void GetAngle();
+
+	void Timer(float deltatime);
+	float m_timer; 
 
 	Vector2 GetSpawnPosition();
+
+	void LoadAnimations(SpriteManager *m_sprite_manager);
+	
  
 protected:
 	AnimatedSprite *m_current_animation;

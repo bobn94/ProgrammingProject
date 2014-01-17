@@ -33,6 +33,7 @@ private:
 	Log m_log;
 	
 	bool m_running;
+	bool m_start;
 	int m_width;
 	int m_height;
 	float m_deltatime;

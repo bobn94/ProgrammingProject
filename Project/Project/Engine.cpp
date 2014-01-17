@@ -16,7 +16,14 @@
 #include "Engine.h"
 #include "Input.h"
 
+#include "StateManager.h"
+
+#include "MenuState.h"
+
+
 Engine::Engine() : m_log("log.txt") {
+	srand((unsigned int) time(0));
+
 	m_window = nullptr;
 	m_level = nullptr;
 	m_draw_manager = nullptr;
@@ -61,18 +68,7 @@ bool Engine::Initialize() {
 	Vector2(132.0f, 122.0f));
 	m_duck = new DuckObject(nullptr, collider);
 	m_duck->SetPosition(Vector2(500.0f, 400.0f));
-
-	AnimatedSprite* sprite = m_sprite_manager->Load("../data/animations/blue_horizontal.txt");
-	m_duck->AddAnimation("blue_horizontal", sprite);
-	
-	sprite = m_sprite_manager->Load("../data/animations/blue_vertical.txt");
-	m_duck->AddingAnimation("blue_vertical", sprite);
-
-	sprite = m_sprite_manager->Load("../data/animations/blue_diagonal.txt");
-	m_duck->AddingAnimation("blue_diagonal", sprite);
-
-	sprite = m_sprite_manager->Load("../data/animations/blue_death.txt");
-	m_duck->AddingAnimation("blue_death", sprite);
+	m_duck->LoadAnimations(m_sprite_manager);
 
 
 	//660.0f
@@ -102,9 +98,11 @@ void Engine::Run() {
 	while(m_running) {
 		UpdateDeltatime();
 		UpdateEvents();
-		m_duck->CheckCollision(m_width, m_height);
+
+		m_duck->Timer(m_deltatime);
+
 		m_duck->Update(m_deltatime);
-		m_level->UppdateCrosshair();	
+		m_level->UpdateCrosshair();	
 
 		m_duck->GetAngle();
 
@@ -116,7 +114,9 @@ void Engine::Run() {
 			m_duck->GetPosition().m_y);
 
 
-		//std::cout << m_duck->m_angle << std::endl;
+	//	std::cout << m_duck->m_angle << std::endl;
+		//std::cout << m_deltatime << std::endl;
+		
 
 		Sprite* sprite = m_sprite_manager->Load("background4.png", 0, 0, 1024, 960);
 		m_draw_manager->Draw(sprite, 0, 0);
@@ -124,27 +124,22 @@ void Engine::Run() {
 		sprite = m_sprite_manager->Load("DucksHit.png", 0, 0, 450, 68);	
 		m_draw_manager->Draw(sprite, 253, 828);
 
-
-
 		if(m_level->m_ammo == 3){					//Kollar vilken ammo bild som ska visas
-			sprite = m_sprite_manager->Load("AmmoIs3.png", 0, 0, 116, 84);	
+			sprite = m_sprite_manager->Load("AmmoIs3_2.png", 0, 0, 116, 84);	
 			m_draw_manager->Draw(sprite, 83, 818);
 		}
 		else if(m_level->m_ammo == 2){
-			sprite = m_sprite_manager->Load("AmmoIs2.png", 0, 0, 116, 84);
+			sprite = m_sprite_manager->Load("AmmoIs2_2.png", 0, 0, 116, 84);
 			m_draw_manager->Draw(sprite, 83, 818);
 		}
 		else if(m_level->m_ammo == 1){
-			sprite = m_sprite_manager->Load("AmmoIs1.png", 0, 0, 116, 84);
+			sprite = m_sprite_manager->Load("AmmoIs1_2.png", 0, 0, 116, 84);
 			m_draw_manager->Draw(sprite, 83, 818);
 		}
 		else{
-			sprite = m_sprite_manager->Load("AmmoIs0.png", 0, 0, 116, 84);
+			sprite = m_sprite_manager->Load("AmmoIs0_2.png", 0, 0, 116, 84);
 			m_draw_manager->Draw(sprite, 83, 818);
-
 		}
-
-
 		
 		std::stringstream strm;		
 		strm << m_level->m_score;		//Gör om m_score till en mer utskriftsvänlig version.
@@ -155,6 +150,8 @@ void Engine::Run() {
 		m_draw_manager->Draw(screen, 765, 830);
 		screen = TTF_RenderText_Shaded(font, "Score", foregroundColor, backgroundColor);	//Skriver ut Score
 		m_draw_manager->Draw(screen, 765, 860);												//Vid Pixlarna 765, 860
+
+
 		int duckPos_x = 362;
 		for(int i = 0; i <= 9; ++i){
 			if(m_level->m_ducksHit[i] == 'R'){
@@ -174,16 +171,38 @@ void Engine::Run() {
 		m_draw_manager->Present();
 
 		SDL_Delay(10);
-		delete sprite;
 	};
 };
 
 void Engine::Cleanup() {
+	if(m_duck != nullptr) {
+		delete m_duck->GetSprite();
+		delete m_duck->GetCollider();
+		delete m_duck;
+		m_duck = nullptr;
+	};
+
+	if(m_level != nullptr) {
+		delete m_level;
+		m_level = nullptr;
+	};
+
+	if(m_sprite_manager != nullptr) {
+		m_sprite_manager->Cleanup();
+		delete m_sprite_manager;
+		m_sprite_manager = nullptr;
+	};
+
+	if(m_draw_manager != nullptr) {
+		m_draw_manager->Cleanup();
+		delete m_draw_manager;
+		m_draw_manager = nullptr;
+	};
+
 	if(m_window != nullptr) {
 		SDL_DestroyWindow(m_window);
 		m_window = nullptr;
 	};
-	delete m_duck;
 	TTF_Quit();
 };
 

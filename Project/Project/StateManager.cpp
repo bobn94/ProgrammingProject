@@ -41,7 +41,6 @@ void StateManager::SetState(const std::string &type){
 };
 
 void StateManager::ChangeState() {
-	std::cout << "StateManager::ChangeState" << std::endl;
 	std::string next = m_current->Next();
 	if (m_current != nullptr) {
 		m_current->Exit();

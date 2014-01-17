@@ -1,4 +1,3 @@
-
 #include "Sprite.h"
 #include "SpriteManager.h"
 
