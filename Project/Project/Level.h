@@ -22,7 +22,9 @@ public:
 	void Draw(DrawManager *drawmanager);
 	bool CheckCollision(GameObject *object, Vector2 &offset);
 	void ChangeAmmo(bool set, int value);
-	void DrawText(SDL_Surface* screen, const char* string, int size, int x, int y, int fgR, int fgG, int fgB, int bgR, int bgG, int bgB);	void SetScore(int score);
+	void DrawText(SDL_Surface* screen, const char* string, int size, int x, int y, int fgR, int fgG, int fgB, int bgR, int bgG, int bgB);
+	void SetScore(int score);
+	void DrawLevel();
 private:
 	Vector2 m_crosshairPos;
 	
@@ -33,5 +35,6 @@ private:
 	int m_flag;
 	int m_ammo;
 	int m_score;
+	char m_ducksHit[10];
+	int m_currentDuck;
 };
-//765, 830 - Score Draw, 
