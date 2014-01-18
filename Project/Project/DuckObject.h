@@ -1,5 +1,5 @@
 #pragma once
- 
+#include "Collider.h"
 #include <map>
 #include <string>
 #include "AnimatedSprite.h"

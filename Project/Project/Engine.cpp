@@ -63,12 +63,7 @@ bool Engine::Initialize() {
 
 	if(m_window == nullptr) { return false; };
 
-	Collider* collider = new Collider(
-	Vector2(500.0f, 500.0f), 
-	Vector2(132.0f, 122.0f));
-	m_duck = new DuckObject(nullptr, collider);
-	m_duck->SetPosition(Vector2(500.0f, 400.0f));
-	m_duck->LoadAnimations(m_sprite_manager);
+	
 
 
 	//660.0f
@@ -78,14 +73,9 @@ bool Engine::Initialize() {
 
 
 	m_level = new Level;
-	m_level->ChangeAmmo(true, 3); //ChangeAmmo(true, 3) - sätter ammo till 3, ChangeAmmo(false, 3) - ökar ammon med 3
-	m_level->SetScore(0);
-	m_level->SpawnCrosshair(m_sprite_manager);
-	m_level->m_currentDuck = 0;
-	for(int i = 0; i <= 9; ++i){
-		m_level->m_ducksHit[i] = 'W';
-	}
-	TTF_Init();
+	m_level->InitLevel(m_sprite_manager);
+	
+	
 	SDL_ShowCursor( SDL_DISABLE );
 	m_running = true;
 	
@@ -93,80 +83,21 @@ bool Engine::Initialize() {
 };
 
 void Engine::Run() {
-	m_duck->Randomize();
+	
 
 	while(m_running) {
 		UpdateDeltatime();
 		UpdateEvents();
 
-		m_duck->Timer(m_deltatime);
-
-		m_duck->Update(m_deltatime);
-		m_level->UpdateCrosshair();	
-
-		m_duck->GetAngle();
-
+		m_level->UpdateLevel(m_deltatime, m_sprite_manager);
 		m_draw_manager->Clear();
 		
-		m_draw_manager->Draw(
-			m_duck->GetSprite(),
-			m_duck->GetPosition().m_x,
-			m_duck->GetPosition().m_y);
+		
 
 
 	//	std::cout << m_duck->m_angle << std::endl;
 		//std::cout << m_deltatime << std::endl;
 		
-
-		Sprite* sprite = m_sprite_manager->Load("background4.png", 0, 0, 1024, 960);
-		m_draw_manager->Draw(sprite, 0, 0);
-
-		sprite = m_sprite_manager->Load("DucksHit.png", 0, 0, 450, 68);	
-		m_draw_manager->Draw(sprite, 253, 828);
-
-		if(m_level->m_ammo == 3){					//Kollar vilken ammo bild som ska visas
-			sprite = m_sprite_manager->Load("AmmoIs3_2.png", 0, 0, 116, 84);	
-			m_draw_manager->Draw(sprite, 83, 818);
-		}
-		else if(m_level->m_ammo == 2){
-			sprite = m_sprite_manager->Load("AmmoIs2_2.png", 0, 0, 116, 84);
-			m_draw_manager->Draw(sprite, 83, 818);
-		}
-		else if(m_level->m_ammo == 1){
-			sprite = m_sprite_manager->Load("AmmoIs1_2.png", 0, 0, 116, 84);
-			m_draw_manager->Draw(sprite, 83, 818);
-		}
-		else{
-			sprite = m_sprite_manager->Load("AmmoIs0_2.png", 0, 0, 116, 84);
-			m_draw_manager->Draw(sprite, 83, 818);
-		}
-		
-		std::stringstream strm;		
-		strm << m_level->m_score;		//Gör om m_score till en mer utskriftsvänlig version.
-		SDL_Color foregroundColor = { 255, 255, 255 };		//Sätter Textfärg till vit
-		SDL_Color backgroundColor = { 0, 0, 0 };			//sätter Bakgrundsfärg till svart
-		TTF_Font* font = TTF_OpenFont("../data/fonts/emulogic.ttf", 25);	//Berättar att vi ska använda ariblk som ligger i ../data/fonts/, och använda den med storlek 20.
-		SDL_Surface* screen = TTF_RenderText_Shaded(font, strm.str().c_str(), foregroundColor, backgroundColor);
-		m_draw_manager->Draw(screen, 765, 830);
-		screen = TTF_RenderText_Shaded(font, "Score", foregroundColor, backgroundColor);	//Skriver ut Score
-		m_draw_manager->Draw(screen, 765, 860);												//Vid Pixlarna 765, 860
-
-
-		int duckPos_x = 362;
-		for(int i = 0; i <= 9; ++i){
-			if(m_level->m_ducksHit[i] == 'R'){
-				sprite = m_sprite_manager->Load("RedDuck.png", 0, 0, 28, 28);	
-				m_draw_manager->Draw(sprite,duckPos_x + (i * 34), 837);
-			}
-			else if(m_level->m_ducksHit[i] == 'W'){
-				sprite = m_sprite_manager->Load("WhiteDuck.png", 0, 0, 28, 28);	
-				m_draw_manager->Draw(sprite,duckPos_x + (i * 34), 837);
-			}
-		}
-		/*if(m_level->m_ammo == 0){
-			m_duck->AnnoyingDogAnimation();
-		}*/
-
 		m_level->Draw(m_draw_manager);
 		m_draw_manager->Present();
 
@@ -203,7 +134,7 @@ void Engine::Cleanup() {
 		SDL_DestroyWindow(m_window);
 		m_window = nullptr;
 	};
-	TTF_Quit();
+	
 };
 
 
@@ -225,7 +156,7 @@ void Engine::UpdateEvents() {
 		}
 		if(event.type == SDL_MOUSEBUTTONDOWN){
 			Vector2 offset;
-			if(m_level->CheckCollision(m_duck, offset)){
+			if(m_level->CheckCollision(offset, m_sprite_manager)){
 				//m_duck->SetPosition(offset + m_duck->GetPosition());
 				
 			}

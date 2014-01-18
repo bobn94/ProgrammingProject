@@ -11,16 +11,14 @@ class Level;
 class Input;
 
 class Engine {
-public: 
+public:
 	Engine();
 	~Engine();
-
 	bool Initialize();
 	void Run();
 	void Cleanup();
 	
-	//KeyBoard* m_keyboard;
-	//Mouse* m_mouse;
+	
 private:
 	void UpdateEvents();
 	void UpdateDeltatime();

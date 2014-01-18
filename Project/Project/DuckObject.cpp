@@ -28,7 +28,7 @@ DuckObject::DuckObject(Sprite* sprite, Collider* collider)
 void DuckObject::Update(float deltatime) {
 	//std::cout << m_duckType << std::endl;
 	if (m_duckType >= 0 && m_duckType <= 3) {
-		speed = 350.0f;
+		speed = 700.0f;
 		//speed = 0.0f;
 	}
 	
@@ -44,7 +44,7 @@ void DuckObject::Update(float deltatime) {
 
 	m_position.m_x += m_dir_x * deltatime * speed;
 	m_position.m_y += m_dir_y * deltatime * speed;
-
+	//m_collider->m_position = m_position; //flyttar med collidern också
 	setCurrentAnimation();
 
 	if(m_current_animation != nullptr) {
@@ -145,6 +145,7 @@ void DuckObject::GetAngle() {
 
 
 void DuckObject::SpawnDuck(){
+	
 	m_duckPos.m_x = (float)(rand()%1000 + 24);
 	m_duckPos.m_y = 500;
 	if(!m_isDuckSpawned){
