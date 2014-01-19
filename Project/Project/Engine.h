@@ -37,6 +37,7 @@ private:
 	
 	bool m_menustate;
 	bool m_gamestate;
+	bool m_optionsstate;
 
 	bool m_running;
 	bool m_start;

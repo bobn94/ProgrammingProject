@@ -16,6 +16,7 @@
 MenuState::MenuState() {
 	m_done = false;
 	m_changetoGameState = false;
+	m_changetoOptionsState = false;
 
 	auto it = m_objects.begin();
 	while(it != m_objects.end()){
@@ -109,13 +110,38 @@ void MenuState::Draw(DrawManager* m_draw_manager) {
 		m_optionstext->GetPosition().m_y);
 
 
+	int highscore[10];
+	std::ifstream stream("../data/score/score.txt");
+	if(!stream.is_open()){
+		return;
+	}
+
+
+	std::string row;
+	unsigned int cords_count = 0;
+	stream >> cords_count;
+	std::getline(stream, row);
+	for(unsigned int i = 0; i < cords_count; i++){
+		std::getline(stream, row);
+		std::stringstream ss(row);
+		std::string ch;
+		int score;
+		ss >> ch;
+		ss >> highscore[i];
+	}
+	
+
+
+	std::stringstream hisc;
+
+	hisc <<  highscore[0];
 
 	SDL_Color m_foregroundColor3 = { 64, 228, 48 };
 	screen = TTF_RenderText_Shaded(m_font, "Highscore: ", m_foregroundColor3, m_backgroundColor);
-	m_draw_manager->Draw(screen, 200, 750);
+	m_draw_manager->Draw(screen, 230, 750);
 	SDL_FreeSurface(screen);
-	screen = TTF_RenderText_Shaded(m_font, "(nummer)", m_foregroundColor3, m_backgroundColor);
-	m_draw_manager->Draw(screen, 600, 750);
+	screen = TTF_RenderText_Shaded(m_font, hisc.str().c_str(), m_foregroundColor3, m_backgroundColor);
+	m_draw_manager->Draw(screen, 630, 750);
 	SDL_FreeSurface(screen);
 
 
@@ -165,7 +191,6 @@ void MenuState::SpawnMenuCrosshair(SpriteManager *sprite_manager){
 				}
 
 				if(offset.Length() > 0.0f && m_GoGamestate){
-				std::cout << "hello" << std::endl;
 				m_changetoGameState = true;
 				return true;
 			}
@@ -182,7 +207,7 @@ void MenuState::SpawnMenuCrosshair(SpriteManager *sprite_manager){
 
 			if(offset.Length() > 0.0f && m_GoOptionsstate){
 				mgr.SetState("OptionsState");
-				std::cout << "yes" << std::endl;
+				m_changetoOptionsState = true;
 				return true;
 			}
 		return false;

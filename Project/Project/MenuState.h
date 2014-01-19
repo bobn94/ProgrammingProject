@@ -27,11 +27,13 @@ public:
 	bool IsType(const std::string &type);
 
 	bool m_changetoGameState;
+	bool m_changetoOptionsState;
 
 	void SpawnMenuCrosshair(SpriteManager *sprite_manager);
 	bool CheckCrosshairCollision(Vector2 &offset, SpriteManager* sprite_manager);
 
 private:
+
 
 	Vector2 m_crosshairPos;
 	Sprite* m_BackgroundSprite;

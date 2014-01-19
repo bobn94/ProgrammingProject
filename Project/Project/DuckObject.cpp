@@ -58,17 +58,9 @@ void DuckObject::Update(float deltatime) {
 		FlyAway();
 	}
 
-
-	/*if ((m_position.m_x - 16.0f >= 0 || m_position.m_x + 128.0f <= 1024) && !isHit && !isMissed){
-		m_position.m_x += m_dir_x * deltatime * speed;
-	}
-	if ((m_position.m_y - 15.5f >= 0 && m_position.m_y <= 500) && !isHit && !isMissed){
-		m_position.m_y += m_dir_y * deltatime * speed;
-	}*/
-
 	m_position.m_x += m_dir_x * deltatime * speed;
 	m_position.m_y += m_dir_y * deltatime * speed;
-	
+
 	if(HasCollider()) {
 		m_collider->m_position = m_position;
 	};
@@ -120,11 +112,14 @@ void DuckObject::AddAnimation(const std::string &name, AnimatedSprite *sprite) {
 };
 
 void DuckObject::CheckCollision() {
+
 	if (m_position.m_y - 15.5f <= 0 || m_position.m_y >= 500){
 		m_dir_y = -m_dir_y;
-	} else if (m_position.m_x - 16.0f <= 0 || m_position.m_x + 128.0f>= 1024){
+	} 	
+	else if (m_position.m_x - 16.0f <= 0 || m_position.m_x + 128.0f >= 1023){
 		m_dir_x = -m_dir_x;
 	}
+
 };
 
 void DuckObject::ChangeDirections () {

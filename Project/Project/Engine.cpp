@@ -72,6 +72,9 @@ bool Engine::Initialize() {
 	m_menu_state = new MenuState();
 	m_menu_state->Initialize(m_sprite_manager);
 
+	m_options_state = new OptionsState();
+	m_options_state->Initialize(m_sprite_manager);
+
 
 	m_level = new Level;
 	m_level->InitLevel(m_sprite_manager);
@@ -102,22 +105,33 @@ void Engine::Run() {
 		mgr.Draw(m_draw_manager);
 		}*/
 
-		if(mgr.m_current->IsType("MenuState") && !m_menu_state->m_changetoGameState) {
-			m_menu_state->Update(m_deltatime, m_sprite_manager);
-			m_menu_state->Draw(m_draw_manager);
-			m_menustate = true;
-		}
-
 		if(m_menu_state->m_changetoGameState) {
 			mgr.SetState("GameStateA");	
 		}
+		if (m_options_state->m_changetoGameState) {
+			mgr.SetState("GameStateA");	
+		}
 
-		if(mgr.m_current->IsType("GameStateA")) {
+		if(m_menu_state->m_changetoOptionsState) {
+			mgr.SetState("OptionsState");	
+		}
+
+		if(mgr.m_current->IsType("MenuState") && !m_menu_state->m_changetoGameState && !m_menu_state->m_changetoOptionsState) {
+			m_menu_state->Update(m_deltatime, m_sprite_manager);
+			m_menu_state->Draw(m_draw_manager);
+			m_menustate = true;
+		} else if (mgr.m_current->IsType("OptionsState") && !m_options_state->m_changetoGameState) {
+			m_options_state->Update(m_deltatime, m_sprite_manager);
+			m_options_state->Draw(m_draw_manager);
+			m_optionsstate = true;
+		} else {
 		m_level->UpdateLevel(m_deltatime, m_sprite_manager);
 		m_level->Draw(m_draw_manager);
 			m_gamestate = true;
 			}
 		
+
+
 		m_draw_manager->Present();
 
 		SDL_Delay(10);
@@ -142,6 +156,7 @@ void Engine::Cleanup() {
 		delete m_menu_state;
 		m_menu_state = nullptr;
 	};
+
 
 	if(m_options_state != nullptr) {
 		delete m_options_state;
@@ -192,9 +207,15 @@ void Engine::UpdateEvents() {
 					
 				}
 			}
+
 			if(m_gamestate) {
 				if(m_level->CheckCollision(offset, m_sprite_manager, m_deltatime)){
 					//m_duck->SetPosition(offset + m_duck->GetPosition());
+				}
+			}
+
+			if(m_optionsstate && m_options_state->isOn) {
+				if(m_options_state->CheckCrosshairCollision(offset, m_sprite_manager)){
 				}
 			}
 		}

@@ -9,6 +9,7 @@
  
 class Sprite;
 class SpriteManager;
+class Level;
  
 class DuckObject : public GameObject {
 	friend class Level;
@@ -63,5 +64,5 @@ protected:
 	std::string m_current_animation_key;
 
 private:
-
+	Level* m_level;
 };
