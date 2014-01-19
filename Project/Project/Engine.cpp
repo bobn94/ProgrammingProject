@@ -139,7 +139,6 @@ void Engine::Cleanup() {
 	
 };
 
-
 void Engine::UpdateDeltatime() {
 	unsigned int ticks = SDL_GetTicks();
 	unsigned int delta = ticks - m_ticks;
@@ -158,7 +157,7 @@ void Engine::UpdateEvents() {
 		}
 		if(event.type == SDL_MOUSEBUTTONDOWN){
 			Vector2 offset;
-			if(m_level->CheckCollision(offset, m_sprite_manager)){
+			if(m_level->CheckCollision(offset, m_sprite_manager, m_deltatime)){
 				//m_duck->SetPosition(offset + m_duck->GetPosition());
 				
 			}

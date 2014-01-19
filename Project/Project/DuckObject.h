@@ -11,6 +11,7 @@ class Sprite;
 class SpriteManager;
  
 class DuckObject : public GameObject {
+	friend class Level;
 public:
 	DuckObject(Sprite* sprite = nullptr, Collider* collider = nullptr);
 
@@ -37,7 +38,9 @@ public:
 	int m_duckType;
 
 	void Death();
+	void FlyAway();
 	bool isHit;
+	bool isMissed;
 
 	bool spawnDuck;
 

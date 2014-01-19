@@ -10,7 +10,6 @@ float Random(float min, float max) {
 	return min + ((max - min) * ((float)rand() / (float)RAND_MAX));
 };
 
-
 DuckObject::DuckObject(Sprite* sprite, Collider* collider)
 : GameObject(sprite, collider)
 {
@@ -24,6 +23,7 @@ DuckObject::DuckObject(Sprite* sprite, Collider* collider)
 
 	spawnDuck = false;
 	isHit = false;
+	isMissed = false;
 };
 
 void DuckObject::Update(float deltatime) {
@@ -53,6 +53,9 @@ void DuckObject::Update(float deltatime) {
 	
 	if (isHit) {
 		Death();
+	}
+	if(isMissed){
+		FlyAway();
 	}
 
 
@@ -97,7 +100,6 @@ void DuckObject::setCurrentAnimation(){
 
 }
 
-
 void DuckObject::AddingAnimation(const std::string &name, AnimatedSprite *sprite) {
 	m_animations.insert(std::pair<std::string,AnimatedSprite*>(name, sprite));
 };
@@ -110,7 +112,6 @@ void DuckObject::AddAnimation(const std::string &name, AnimatedSprite *sprite) {
 	};
 };
 
-
 void DuckObject::CheckCollision() {
 	if (m_position.m_y - 15.5f <= 0 || m_position.m_y >= 500){
 		m_dir_y = -m_dir_y;
@@ -118,7 +119,6 @@ void DuckObject::CheckCollision() {
 		m_dir_x = -m_dir_x;
 	}
 };
-
 
 void DuckObject::ChangeDirections () {
 		if (m_timer > 1.0f) {
@@ -190,11 +190,9 @@ Vector2 DuckObject::GetSpawnPosition() {
 	return m_spawn_position;
 };
 
-
 void DuckObject::Timer(float deltatime) {
 		m_timer += deltatime;
 };
-
 
 void DuckObject::LoadAnimations(SpriteManager *m_sprite_manager) {	
 	if(m_duckType >= 0 && m_duckType <= 3) {
@@ -270,4 +268,14 @@ void DuckObject::LoadAnimations(SpriteManager *m_sprite_manager) {
 		AddAnimation("hit", sprite);
 	}
 	
+}
+void DuckObject::FlyAway(){
+	m_current_animation_key = "vertical";
+	m_current_animation = m_animations[m_current_animation_key];
+		m_sprite = m_animations[m_current_animation_key];
+		m_dir_x = 0.0f;
+		m_dir_y = -1.0f;
+		if(m_position.m_y <= -100){
+			isMissed = false;
+		}
 }

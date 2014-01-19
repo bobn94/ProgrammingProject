@@ -30,7 +30,7 @@ public:
 	
 	void Draw(DrawManager *drawmanager);
 	
-	bool CheckCollision(Vector2 &offset, SpriteManager* sprite_manager);
+	bool CheckCollision(Vector2 &offset, SpriteManager* sprite_manager, float deltatime);
 	
 	void ChangeAmmo(bool set, int value);
 	
@@ -47,6 +47,8 @@ public:
 	void Defeat();
 
 	void Victory();
+
+	void CheckHighscore();
 
 private:
 	
@@ -77,4 +79,5 @@ private:
 	char m_ducksHit[10];
 	int m_currentDuck;
 	bool m_isDuckSpawned;
+	bool shouldEnd;
 };

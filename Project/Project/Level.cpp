@@ -90,10 +90,10 @@ void Level::Draw(DrawManager *drawmanager){
 	
 	TTF_Quit();
 }
-bool Level::CheckCollision(Vector2 &offset, SpriteManager* sprite_manager){
+bool Level::CheckCollision(Vector2 &offset, SpriteManager* sprite_manager, float deltatime){
 	
 	
-	if(SDL_BUTTON(1) && m_ammo > 0){
+	if(SDL_BUTTON(1) && m_ammo > 0 && !m_duck->isHit){
 		m_ammo -= 1;
 		//shoot->Play();
 		for (auto i = 0UL; i < m_objects.size(); i++){
@@ -107,6 +107,7 @@ bool Level::CheckCollision(Vector2 &offset, SpriteManager* sprite_manager){
 				}
 			}
 			if(offset.Length() > 0.0f){
+				
 				if (m_duck->m_duckType >= 0 && m_duck->m_duckType <= 3){
 					m_score += (500 * m_currentRound);
 				} else if (m_duck->m_duckType >= 4 && m_duck->m_duckType <= 5) {
@@ -143,19 +144,30 @@ bool Level::CheckCollision(Vector2 &offset, SpriteManager* sprite_manager){
 					m_currentDuck = 0;
 					if(ducksHit >= 7){
 						m_currentRound += 1;
+						if(m_currentRound == 11){
+						Victory();
+						m_currentRound = 1;
+					}
 					}
 					else{
 						Defeat();
+						m_currentRound = 1;
 					}
 				}
 				else{
 					m_currentDuck += 1;
+					if(m_currentRound == 11){
+						Victory();
+						m_currentRound = 1;
+					}
 				}
 
 				return true;
+				}
 			}
 		}
 		if(m_ammo == 0){
+			m_duck->isMissed = true;
 			m_ammo = 3;
 			if(m_currentDuck == 9){
 					for(int i = 0; i <= 9; ++i){
@@ -181,17 +193,26 @@ bool Level::CheckCollision(Vector2 &offset, SpriteManager* sprite_manager){
 					m_currentDuck = 0;
 					if(ducksHit >= 7){
 						m_currentRound += 1;
+						if(m_currentRound == 11){
+						Victory();
+						m_currentRound = 1;
+					}
 					}
 					else{
 						Defeat();
+						m_currentRound = 1;
 					}
 				}
 				else{
 					m_currentDuck += 1;
+					if(m_currentRound == 11){
+						Victory();
+						m_currentRound = 1;
+					}
 				}
 		}
 		return false;
-	}
+	
 }
 void Level::SpawnCrosshair(SpriteManager *sprite_manager){
 	Sprite *sprite = sprite_manager->Load("Crosshair.png", 0, 0, 32, 32);
@@ -221,14 +242,14 @@ void Level::UpdateLevel(float deltatime, SpriteManager* spritemanager){
 	m_duck->m_collider->m_position = m_duck->m_position;
 	m_duck->GetAngle();
 
-	if(m_duck->m_position.m_y >= 700.0f) {
+	if(m_duck->m_position.m_y >= 700.0f || m_duck->m_position.m_y <= -100.0f) {
 		delete m_duck->GetSprite();
 		delete m_duck->GetCollider();
 		delete m_duck;
 		m_duck = nullptr;
 		SpawnDuck(spritemanager);
 	}
-
+	
 }
 void Level::ChangeAmmo(bool set, int value){
 	if(set){
@@ -258,6 +279,7 @@ void Level::InitLevel(SpriteManager *sprite_manager){
 	m_isDuckSpawned = false;
 	ChangeAmmo(true, 3); //ChangeAmmo(true, 3) - sätter ammo till 3, ChangeAmmo(false, 3) - ökar ammon med 3
 	SetScore(0);
+	shouldEnd = false;
 	SpawnCrosshair(sprite_manager);
 	m_currentDuck = 0;
 	
@@ -284,6 +306,18 @@ void Level::SpawnDuck(SpriteManager *spritemanager){
 	m_duck->Randomize();
 }
 void Level::Defeat(){
+	CheckHighscore();
+	
+	
+}
+
+void Level::Victory(){
+	CheckHighscore();
+
+
+}
+
+void Level::CheckHighscore(){
 	int highscore[10];
 	std::ifstream stream("../data/score/score.txt");
 	if(!stream.is_open()){
@@ -302,13 +336,38 @@ void Level::Defeat(){
 		int score;
 		
 		ss >> ch;
-		ss >> score;
+		ss >> highscore[i];
 
-		highscore[i] = score;
+		 
 	}
-	
-}
+	stream.close();
+	std::ofstream ostream("../data/score/score.txt");
+	ostream.clear();
+	std::string scoreOut;
+	if(m_score > highscore[9]){
+		highscore[9] = m_score;
+	}
 
-void Level::Victory(){
+	for(int i = 9; i >= 1; --i){
+		
+			if(highscore[i-1] < highscore[i]){
 
+				int temp;
+
+				temp = highscore[i];
+
+				highscore[i] = highscore[i-1];
+
+				highscore[i-1] = temp;
+
+			}
+		
+	}
+	ostream << "10\n";
+	for (int i = 0; i <= 9; ++i){
+		ostream << (i+1);
+		ostream << " ";
+		ostream << highscore[i];
+		ostream << "\n";
+	}
 }
