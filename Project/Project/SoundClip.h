@@ -1,3 +1,5 @@
+// SoundClip.h
+
 #pragma once
 #ifndef SOUNDCLIP_H_INCLUDED
 #define SOUNDCLIP_H_INCLUDED

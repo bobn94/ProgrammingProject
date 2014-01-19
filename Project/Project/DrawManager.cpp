@@ -41,7 +41,7 @@ DrawManager::DrawManager(){
 	}
 	void DrawManager::Draw(SDL_Surface* surface, int x, int y)
 {
-    SDL_Rect src = surface->clip_rect;
+     SDL_Rect src = surface->clip_rect;
     SDL_Rect dst = { x, y, surface->w, surface->h};
     SDL_Texture* texture = SDL_CreateTextureFromSurface(m_renderer, surface);
     SDL_RenderCopy(m_renderer, texture, &src, &dst);

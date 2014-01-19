@@ -6,10 +6,13 @@
 #include <SDL_ttf.h>
 #include "Vector2.h"
 #include "DuckObject.h"
+
+
 class SpriteManager;
 class Sprite;
 class GameObject;
 class DrawManager;
+
 class Level{
 	friend class Engine;
 	struct Cords{
@@ -44,23 +47,30 @@ public:
 	void Defeat();
 
 	void Victory();
-	
+
 private:
 	
 	Vector2 m_crosshairPos;
 	Sprite* m_BackgroundSprite;
 	Sprite* m_DucksHitSprite;
+
 	Sprite* m_Ammo3Sprite;
 	Sprite* m_Ammo2Sprite;
 	Sprite* m_Ammo1Sprite;
 	Sprite* m_Ammo0Sprite;
+
 	Sprite* m_RedDuckSprite;
 	Sprite* m_WhiteDuckSprite;
+
 	DuckObject *m_duck;
+
+
+
 	std::string m_spritemap_filename;
 	std::map<char, Cords> m_tile_cords;
 	std::map<char, Sprite*> m_sprite;
 	std::vector<GameObject*> m_objects;
+
 	int m_flag;
 	int m_ammo;
 	int m_score;

@@ -16,13 +16,13 @@ void GameStateB::Exit() {
 	
 };
 
-bool GameStateB::Update(float deltatime) {
+bool GameStateB::Update(float deltatime, SpriteManager* m_sprite_manager) {
 	
 
 	return false;	
 };
 
-void GameStateB::Draw() {
+void GameStateB::Draw(DrawManager* m_draw_manager) {
 	
 };
 

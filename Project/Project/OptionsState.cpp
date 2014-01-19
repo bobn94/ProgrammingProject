@@ -15,12 +15,12 @@ void OptionsState::Exit() {
 
 };
 
-bool OptionsState::Update(float deltatime) {
+bool OptionsState::Update(float deltatime, SpriteManager* m_sprite_manager) {
 
 	return false;	
 };
 
-void OptionsState::Draw() {
+void OptionsState::Draw(DrawManager* m_draw_manager) {
 	
 };
 

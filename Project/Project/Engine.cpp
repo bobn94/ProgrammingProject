@@ -19,11 +19,12 @@
 #include "StateManager.h"
 
 #include "MenuState.h"
+#include "GameStateA.h"
+#include "GameStateB.h"
+#include "OptionsState.h"
 
 
 Engine::Engine() : m_log("log.txt") {
-	srand((unsigned int) time(0));
-
 	m_window = nullptr;
 	m_level = nullptr;
 	m_draw_manager = nullptr;
@@ -51,6 +52,8 @@ bool Engine::Initialize() {
 		m_width, m_height,
 		SDL_WINDOW_OPENGL);
 
+	if(m_window == nullptr) { return false; };
+
 	m_draw_manager = new DrawManager;
 	if(!m_draw_manager->Initialize(m_window, m_width, m_height)) {
 		return false;
@@ -60,16 +63,6 @@ bool Engine::Initialize() {
 	if(!m_sprite_manager->Initialize("../data/sprites/")){
 		return false;
 	};
-
-	if(m_window == nullptr) { return false; };
-
-	
-
-
-	//660.0f
-	
-	/*SDL_RendererFlip flipType = SDL_FLIP_NONE;
-	flipType = SDL_FLIP_HORIZONTAL;*/
 
 
 	m_level = new Level;
@@ -83,25 +76,34 @@ bool Engine::Initialize() {
 };
 
 void Engine::Run() {
-	
+	StateManager mgr;
+		mgr.Attach(new MenuState());
+		mgr.Attach(new GameStateA());
+		mgr.Attach(new GameStateB());
+		mgr.Attach(new OptionsState());
+		mgr.SetState("GameStateA");	
 
 	while(m_running) {
+	while (mgr.IsRunning()) {
 		UpdateDeltatime();
 		UpdateEvents();
 
+		m_draw_manager->Clear();		
+
+	if(!mgr.m_current->IsType("GameStateA")) {
+		mgr.Update(0.01f, m_sprite_manager);
+		mgr.Draw(m_draw_manager);
+		}
+
+		if(mgr.m_current->IsType("GameStateA")) {
 		m_level->UpdateLevel(m_deltatime, m_sprite_manager);
-		m_draw_manager->Clear();
-		
-		
-
-
-	//	std::cout << m_duck->m_angle << std::endl;
-		//std::cout << m_deltatime << std::endl;
-		
 		m_level->Draw(m_draw_manager);
+			}
+		
 		m_draw_manager->Present();
 
 		SDL_Delay(10);
+		};	
 	};
 };
 

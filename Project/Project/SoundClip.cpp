@@ -1,3 +1,5 @@
+// SoundClip.cpp
+
 #include "SoundClip.h"
 
 SoundClip::SoundClip() {

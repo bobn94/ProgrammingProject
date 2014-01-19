@@ -5,6 +5,7 @@
 #include "AnimatedSprite.h"
 #include "SpriteManager.h"
 #include "GameObject.h"
+#include "Level.h"
  
 class Sprite;
 class SpriteManager;
@@ -35,16 +36,19 @@ public:
 
 	int m_duckType;
 
-	void SpawnDuck();
-	bool m_isDuckSpawned;
-	Vector2 m_duckPos;
+	void Death();
+	bool isHit;
+
+	bool spawnDuck;
 
 	void GetAngle();
 
 	void Timer(float deltatime);
 	float m_timer; 
 
+
 	Vector2 GetSpawnPosition();
+	Vector2 m_spawn_position;
 
 	void LoadAnimations(SpriteManager *m_sprite_manager);
 	
@@ -56,5 +60,5 @@ protected:
 	std::string m_current_animation_key;
 
 private:
-	Vector2 m_spawn_position;
+
 };

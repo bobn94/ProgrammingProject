@@ -6,6 +6,7 @@
 #include "SpriteManager.h"
 #include "DrawManager.h"
 #include "GameObject.h"
+#include "DuckObject.h"
 #include "Collider.h"
 
 Level::Level(){
@@ -21,9 +22,19 @@ Level::~Level(){
 	}
 
 }
+
+
+
 void Level::Draw(DrawManager *drawmanager){
 	TTF_Init();
+	
+	drawmanager->Draw(
+		m_duck->GetSprite(),
+		m_duck->GetPosition().m_x,
+		m_duck->GetPosition().m_y);
+	
 	drawmanager->Draw(m_BackgroundSprite, 0, 0);
+
 	drawmanager->Draw(m_DucksHitSprite, 253, 828);
 	if(m_ammo == 3){					//Kollar vilken ammo bild som ska visas	
 			drawmanager->Draw(m_Ammo3Sprite, 83, 818);
@@ -39,6 +50,8 @@ void Level::Draw(DrawManager *drawmanager){
 		}
 	std::stringstream strm;
 	std::stringstream rnd;
+
+
 	strm << m_score;		//Gör om m_score till en mer utskriftsvänlig version.
 	rnd << m_currentRound;
 	SDL_Color m_foregroundColor = { 255, 255, 255 };		//Sätter Textfärg till vit
@@ -72,18 +85,17 @@ void Level::Draw(DrawManager *drawmanager){
 			m_objects[i]->GetPosition().m_y);
 
 	}
-	drawmanager->Draw(
-			m_duck->GetSprite(),
-			m_duck->GetPosition().m_x,
-			m_duck->GetPosition().m_y);
+
 
 	
 	TTF_Quit();
 }
 bool Level::CheckCollision(Vector2 &offset, SpriteManager* sprite_manager){
+	
+	
 	if(SDL_BUTTON(1) && m_ammo > 0){
 		m_ammo -= 1;
-		//<Gun sound here>
+		//shoot->Play();
 		for (auto i = 0UL; i < m_objects.size(); i++){
 			if(m_objects[i]->HasCollider()) {
 				Vector2 off;
@@ -95,7 +107,15 @@ bool Level::CheckCollision(Vector2 &offset, SpriteManager* sprite_manager){
 				}
 			}
 			if(offset.Length() > 0.0f){
-				m_score += (500 * m_currentRound);
+				if (m_duck->m_duckType >= 0 && m_duck->m_duckType <= 3){
+					m_score += (500 * m_currentRound);
+				} else if (m_duck->m_duckType >= 4 && m_duck->m_duckType <= 5) {
+					m_score += (1000 * m_currentRound);
+				}
+				else {
+					m_score += (1500 * m_currentRound);
+				}
+				m_duck->isHit = true;
 				m_ducksHit[m_currentDuck] = 'R';
 				m_ammo = 3;
 				if(m_currentDuck == 9){
@@ -201,6 +221,14 @@ void Level::UpdateLevel(float deltatime, SpriteManager* spritemanager){
 	m_duck->m_collider->m_position = m_duck->m_position;
 	m_duck->GetAngle();
 
+	if(m_duck->m_position.m_y >= 700.0f) {
+		delete m_duck->GetSprite();
+		delete m_duck->GetCollider();
+		delete m_duck;
+		m_duck = nullptr;
+		SpawnDuck(spritemanager);
+	}
+
 }
 void Level::ChangeAmmo(bool set, int value){
 	if(set){
@@ -244,14 +272,14 @@ void Level::InitLevel(SpriteManager *sprite_manager){
 	m_Ammo0Sprite = sprite_manager->Load("AmmoIs0_2.png", 0, 0, 116, 84);
 	m_RedDuckSprite = sprite_manager->Load("RedDuck.png", 0, 0, 28, 28);
 	m_WhiteDuckSprite = sprite_manager->Load("WhiteDuck.png", 0, 0, 28, 28);
-	
+
 }
 void Level::SpawnDuck(SpriteManager *spritemanager){
 	Collider* collider = new Collider(
 	Vector2(500.0f, 500.0f), 
 	Vector2(132.0f, 122.0f));
 	m_duck = new DuckObject(nullptr, collider);
-	m_duck->SetPosition(Vector2(500.0f, 400.0f));
+	m_duck->SetPosition(m_duck->GetSpawnPosition());
 	m_duck->LoadAnimations(spritemanager);
 	m_duck->Randomize();
 }

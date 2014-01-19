@@ -1,3 +1,5 @@
+// MusicClip.h
+
 #pragma once
 #ifndef MUSICCLIP_H_INCLUDED
 #define MUSICCLIP_H_INCLUDED
@@ -10,10 +12,10 @@ public:
 	~MusicClip();
 	MusicClip(Mix_Music* p_xClip);
 	void Play();
+//	void Play(int amount, int duration);
 	void Pause();
 	void Stop();
-// Maybe going to add Playlists/Volume/Resume
-
+//	void Fade (int from, int to, int duration); Example
 private:
 	Mix_Music* m_xClip;
 	int m_iChannel;

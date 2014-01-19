@@ -1,3 +1,5 @@
+// SoundManager.cpp
+
 #include "SoundManager.h"
 #include "SoundClip.h"
 #include "MusicClip.h"
@@ -12,13 +14,13 @@ SoundManager::SoundManager() {
 };
 
 SoundManager::~SoundManager() {
-	for (int i = 0; i < m_axSoundClips.size(); i++) {
+	for (int i = 0; i<m_axSoundClips.size(); i++) {
 		delete m_axSoundClips[i];
 		m_axSoundClips[i] = nullptr;
 	}
 	m_axSoundClips.clear();
 
-	for (int i = 0; i < m_axMusicClips.size(); i++) {
+	for (int i = 0; i<m_axMusicClips.size(); i++) {
 		delete m_axMusicClips[i];
 		m_axMusicClips[i] = nullptr;
 	}

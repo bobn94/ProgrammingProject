@@ -18,16 +18,16 @@ void StateManager::Attach(State *state) {
 	m_states.push_back(state);
 };
 
-void StateManager::Update(float deltatime) {
+void StateManager::Update(float deltatime, SpriteManager* m_sprite_manager) {
 	if(m_current == nullptr) { return; };
-	if(!m_current->Update(deltatime)) {
+	if(!m_current->Update(deltatime, m_sprite_manager)) {
 		ChangeState();
 	};
 };
 
-void StateManager::Draw() {
+void StateManager::Draw(DrawManager* m_draw_manager) {
 	if(m_current == nullptr) { return; };
-	m_current->Draw();
+	m_current->Draw(m_draw_manager);
 };
 
 void StateManager::SetState(const std::string &type){

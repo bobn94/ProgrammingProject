@@ -13,12 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Source Files\Sounds">
-      <UniqueIdentifier>{6ead3f11-c4f7-4207-a3d9-9bb53786690e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Sounds">
-      <UniqueIdentifier>{d90ad1fa-e320-4839-a69c-2ac4758494c0}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Game Objects">
       <UniqueIdentifier>{27be35db-f971-4f51-bc7c-f7cb6eb5d891}</UniqueIdentifier>
     </Filter>
@@ -36,6 +30,12 @@
     </Filter>
     <Filter Include="Source Files\States">
       <UniqueIdentifier>{cd8979fc-0bd4-4c5d-a85c-945fd078521c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Sounds">
+      <UniqueIdentifier>{e567a9b9-a30b-46f8-9508-f761299e1b84}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Sounds">
+      <UniqueIdentifier>{0d564167-5e83-476e-a08c-4c536c0175aa}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -59,15 +59,6 @@
     </ClCompile>
     <ClCompile Include="Input.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SoundManager.cpp">
-      <Filter>Source Files\Sounds</Filter>
-    </ClCompile>
-    <ClCompile Include="MusicClip.cpp">
-      <Filter>Source Files\Sounds</Filter>
-    </ClCompile>
-    <ClCompile Include="SoundClip.cpp">
-      <Filter>Source Files\Sounds</Filter>
     </ClCompile>
     <ClCompile Include="DuckObject.cpp">
       <Filter>Source Files\Game Objects</Filter>
@@ -102,6 +93,15 @@
     <ClCompile Include="GameStateB.cpp">
       <Filter>Source Files\States</Filter>
     </ClCompile>
+    <ClCompile Include="MusicClip.cpp">
+      <Filter>Source Files\Sounds</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundClip.cpp">
+      <Filter>Source Files\Sounds</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundManager.cpp">
+      <Filter>Source Files\Sounds</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine.h">
@@ -121,15 +121,6 @@
     </ClInclude>
     <ClInclude Include="Input.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MusicClip.h">
-      <Filter>Header Files\Sounds</Filter>
-    </ClInclude>
-    <ClInclude Include="SoundManager.h">
-      <Filter>Header Files\Sounds</Filter>
-    </ClInclude>
-    <ClInclude Include="SoundClip.h">
-      <Filter>Header Files\Sounds</Filter>
     </ClInclude>
     <ClInclude Include="GameObject.h">
       <Filter>Header Files\Game Objects</Filter>
@@ -166,6 +157,15 @@
     </ClInclude>
     <ClInclude Include="GameStateB.h">
       <Filter>Header Files\States</Filter>
+    </ClInclude>
+    <ClInclude Include="MusicClip.h">
+      <Filter>Header Files\Sounds</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundManager.h">
+      <Filter>Header Files\Sounds</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundClip.h">
+      <Filter>Header Files\Sounds</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
