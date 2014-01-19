@@ -22,9 +22,6 @@ Level::~Level(){
 	}
 
 }
-
-
-
 void Level::Draw(DrawManager *drawmanager){
 	TTF_Init();
 	

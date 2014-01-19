@@ -7,6 +7,8 @@ class Sprite;
 
 class GameObject{
 	friend class Level;
+	friend class MenuState;
+	friend class OptionsState;
 public:
 	GameObject(Sprite *sprite = nullptr, Collider *collider = nullptr);
 

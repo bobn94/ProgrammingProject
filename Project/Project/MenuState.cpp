@@ -42,6 +42,7 @@ bool MenuState::Update(float deltatime, SpriteManager* m_sprite_manager) {
 	m_crosshairPos.m_x = x -16;
 	m_crosshairPos.m_y = y -16;
 	m_objects[0]->SetPosition(m_crosshairPos);
+	m_objects[0]->m_collider->m_position = m_crosshairPos;
 	return !m_done;
 };
 
