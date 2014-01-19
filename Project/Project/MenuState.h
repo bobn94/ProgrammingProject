@@ -26,6 +26,8 @@ public:
 	std::string Next();
 	bool IsType(const std::string &type);
 
+	bool m_changetoGameState;
+
 	void SpawnMenuCrosshair(SpriteManager *sprite_manager);
 	bool CheckCrosshairCollision(Vector2 &offset, SpriteManager* sprite_manager);
 

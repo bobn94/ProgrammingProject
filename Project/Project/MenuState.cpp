@@ -15,6 +15,7 @@
 
 MenuState::MenuState() {
 	m_done = false;
+	m_changetoGameState = false;
 
 	auto it = m_objects.begin();
 	while(it != m_objects.end()){
@@ -150,6 +151,8 @@ void MenuState::SpawnMenuCrosshair(SpriteManager *sprite_manager){
 }
 
  bool MenuState::CheckCrosshairCollision(Vector2 &offset, SpriteManager* sprite_manager) {
+	StateManager mgr;
+	 
 	 if(SDL_BUTTON(1)) {
 		for (auto i = 0UL; i < m_objects.size(); i++){
 			if(m_objects[i]->HasCollider()) {
@@ -162,8 +165,8 @@ void MenuState::SpawnMenuCrosshair(SpriteManager *sprite_manager){
 				}
 
 				if(offset.Length() > 0.0f && m_GoGamestate){
-				m_next_state = "GameStateA";
 				std::cout << "hello" << std::endl;
+				m_changetoGameState = true;
 				return true;
 			}
 
@@ -178,8 +181,8 @@ void MenuState::SpawnMenuCrosshair(SpriteManager *sprite_manager){
 
 
 			if(offset.Length() > 0.0f && m_GoOptionsstate){
-				m_next_state = "OptionsState";
-				std::cout << "hello" << std::endl;
+				mgr.SetState("OptionsState");
+				std::cout << "yes" << std::endl;
 				return true;
 			}
 		return false;

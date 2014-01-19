@@ -98,7 +98,6 @@ void Level::Draw(DrawManager *drawmanager){
 }
 bool Level::CheckCollision(Vector2 &offset, SpriteManager* sprite_manager, float deltatime){
 	
-	
 	if(SDL_BUTTON(1) && m_ammo > 0 && !m_duck->isHit){
 		m_ammo -= 1;
 		//shoot->Play();

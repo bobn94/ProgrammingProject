@@ -59,6 +59,13 @@ void DuckObject::Update(float deltatime) {
 	}
 
 
+	/*if ((m_position.m_x - 16.0f >= 0 || m_position.m_x + 128.0f <= 1024) && !isHit && !isMissed){
+		m_position.m_x += m_dir_x * deltatime * speed;
+	}
+	if ((m_position.m_y - 15.5f >= 0 && m_position.m_y <= 500) && !isHit && !isMissed){
+		m_position.m_y += m_dir_y * deltatime * speed;
+	}*/
+
 	m_position.m_x += m_dir_x * deltatime * speed;
 	m_position.m_y += m_dir_y * deltatime * speed;
 	

@@ -20,7 +20,6 @@
 
 #include "MenuState.h"
 #include "GameStateA.h"
-#include "GameStateB.h"
 #include "OptionsState.h"
 
 
@@ -88,7 +87,6 @@ void Engine::Run() {
 	StateManager mgr;
 		mgr.Attach(new MenuState());
 		mgr.Attach(new GameStateA());
-		mgr.Attach(new GameStateB());
 		mgr.Attach(new OptionsState());
 		mgr.SetState("MenuState");	
 
@@ -104,10 +102,14 @@ void Engine::Run() {
 		mgr.Draw(m_draw_manager);
 		}*/
 
-		if(mgr.m_current->IsType("MenuState")) {
+		if(mgr.m_current->IsType("MenuState") && !m_menu_state->m_changetoGameState) {
 			m_menu_state->Update(m_deltatime, m_sprite_manager);
 			m_menu_state->Draw(m_draw_manager);
 			m_menustate = true;
+		}
+
+		if(m_menu_state->m_changetoGameState) {
+			mgr.SetState("GameStateA");	
 		}
 
 		if(mgr.m_current->IsType("GameStateA")) {
@@ -178,8 +180,6 @@ void Engine::UpdateDeltatime() {
 void Engine::UpdateEvents() {
 	SDL_Event event;
 
-	StateManager mgr;
-
 	while(SDL_PollEvent(&event)) {
 		if(event.type == SDL_QUIT) {
 			m_running = false;
@@ -189,11 +189,9 @@ void Engine::UpdateEvents() {
 
 			if(m_menustate) {
 				if(m_menu_state->CheckCrosshairCollision(offset, m_sprite_manager)){
-					mgr.SetState("GameStateA");
-					//m_duck->SetPosition(offset + m_duck->GetPosition());
+					
 				}
 			}
-
 			if(m_gamestate) {
 				if(m_level->CheckCollision(offset, m_sprite_manager, m_deltatime)){
 					//m_duck->SetPosition(offset + m_duck->GetPosition());
