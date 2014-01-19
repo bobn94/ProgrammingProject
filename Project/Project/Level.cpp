@@ -28,12 +28,20 @@ Level::~Level(){
 void Level::Draw(DrawManager *drawmanager){
 	TTF_Init();
 	
+	if (m_duck->isMissed) {
+	drawmanager->Draw(m_FlyAwayBG, 0, 0);
+	}
+
 	drawmanager->Draw(
 		m_duck->GetSprite(),
 		m_duck->GetPosition().m_x,
 		m_duck->GetPosition().m_y);
 	
 	drawmanager->Draw(m_BackgroundSprite, 0, 0);
+
+	if (m_duck->isMissed) {
+		drawmanager->Draw(m_FlyAway, 390, 290);
+	}
 
 	drawmanager->Draw(m_DucksHitSprite, 253, 828);
 	if(m_ammo == 3){					//Kollar vilken ammo bild som ska visas	
@@ -48,6 +56,7 @@ void Level::Draw(DrawManager *drawmanager){
 		else{
 			drawmanager->Draw(m_Ammo0Sprite, 83, 818);
 		}
+
 	std::stringstream strm;
 	std::stringstream rnd;
 
@@ -242,7 +251,7 @@ void Level::UpdateLevel(float deltatime, SpriteManager* spritemanager){
 	m_duck->m_collider->m_position = m_duck->m_position;
 	m_duck->GetAngle();
 
-	if(m_duck->m_position.m_y >= 700.0f || m_duck->m_position.m_y <= -100.0f) {
+	if(m_duck->m_position.m_y >= 700.0f || m_duck->m_position.m_y <= -400.0f) {
 		delete m_duck->GetSprite();
 		delete m_duck->GetCollider();
 		delete m_duck;
@@ -286,6 +295,8 @@ void Level::InitLevel(SpriteManager *sprite_manager){
 	for(int i = 0; i <= 9; ++i){
 		m_ducksHit[i] = 'W';
 	}
+	m_FlyAway = sprite_manager->Load("flyaway.png", 0, 0, 292, 68);
+	m_FlyAwayBG = sprite_manager->Load("flyawaybackground.png", 0, 0, 1024, 960);
 	m_BackgroundSprite = sprite_manager->Load("background4.png", 0, 0, 1024, 960);
 	m_DucksHitSprite = sprite_manager->Load("DucksHit.png", 0, 0, 450, 68);
 	m_Ammo3Sprite = sprite_manager->Load("AmmoIs3_2.png", 0, 0, 116, 84);

@@ -1,4 +1,5 @@
 #pragma once
+
 #include <string>
 #include <vector>
 #include <map>
@@ -11,6 +12,7 @@
 class SpriteManager;
 class Sprite;
 class DrawManager;
+class GameObject;
 
 class MenuState : public State {
 public:
@@ -29,11 +31,15 @@ public:
 
 private:
 
-
 	Vector2 m_crosshairPos;
 	Sprite* m_BackgroundSprite;
 	std::vector<GameObject*> m_objects;
 
+	GameObject *m_startgametext;
+	GameObject *m_optionstext;
+
+	bool m_GoGamestate;
+	bool m_GoOptionsstate;
 
 	bool m_done;
 	std::string m_next_state;

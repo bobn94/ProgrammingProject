@@ -275,7 +275,7 @@ void DuckObject::FlyAway(){
 		m_sprite = m_animations[m_current_animation_key];
 		m_dir_x = 0.0f;
 		m_dir_y = -1.0f;
-		if(m_position.m_y <= -100){
+		if(m_position.m_y <= -400){
 			isMissed = false;
 		}
 }

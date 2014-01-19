@@ -53,6 +53,8 @@ public:
 private:
 	
 	Vector2 m_crosshairPos;
+	Sprite* m_FlyAway;
+	Sprite* m_FlyAwayBG;
 	Sprite* m_BackgroundSprite;
 	Sprite* m_DucksHitSprite;
 

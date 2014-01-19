@@ -29,6 +29,12 @@ Engine::Engine() : m_log("log.txt") {
 	m_level = nullptr;
 	m_draw_manager = nullptr;
 	m_sprite_manager = nullptr;
+
+	m_menu_state = nullptr;
+	m_options_state = nullptr;
+	m_menustate = false;
+	m_gamestate = false;
+
 	//m_mouse = nullptr;
 	//m_keyboard = nullptr;
 	m_running = false;
@@ -64,6 +70,9 @@ bool Engine::Initialize() {
 		return false;
 	};
 
+	m_menu_state = new MenuState();
+	m_menu_state->Initialize(m_sprite_manager);
+
 
 	m_level = new Level;
 	m_level->InitLevel(m_sprite_manager);
@@ -81,7 +90,7 @@ void Engine::Run() {
 		mgr.Attach(new GameStateA());
 		mgr.Attach(new GameStateB());
 		mgr.Attach(new OptionsState());
-		mgr.SetState("GameStateA");	
+		mgr.SetState("MenuState");	
 
 	while(m_running) {
 	while (mgr.IsRunning()) {
@@ -90,14 +99,21 @@ void Engine::Run() {
 
 		m_draw_manager->Clear();		
 
-	if(!mgr.m_current->IsType("GameStateA")) {
+	/*if(!mgr.m_current->IsType("GameStateA")) {
 		mgr.Update(0.01f, m_sprite_manager);
 		mgr.Draw(m_draw_manager);
+		}*/
+
+		if(mgr.m_current->IsType("MenuState")) {
+			m_menu_state->Update(m_deltatime, m_sprite_manager);
+			m_menu_state->Draw(m_draw_manager);
+			m_menustate = true;
 		}
 
 		if(mgr.m_current->IsType("GameStateA")) {
 		m_level->UpdateLevel(m_deltatime, m_sprite_manager);
 		m_level->Draw(m_draw_manager);
+			m_gamestate = true;
 			}
 		
 		m_draw_manager->Present();
@@ -118,6 +134,16 @@ void Engine::Cleanup() {
 	if(m_level != nullptr) {
 		delete m_level;
 		m_level = nullptr;
+	};
+
+	if(m_menu_state != nullptr) {
+		delete m_menu_state;
+		m_menu_state = nullptr;
+	};
+
+	if(m_options_state != nullptr) {
+		delete m_options_state;
+		m_options_state = nullptr;
 	};
 
 	if(m_sprite_manager != nullptr) {
@@ -151,15 +177,27 @@ void Engine::UpdateDeltatime() {
 
 void Engine::UpdateEvents() {
 	SDL_Event event;
+
+	StateManager mgr;
+
 	while(SDL_PollEvent(&event)) {
 		if(event.type == SDL_QUIT) {
 			m_running = false;
 		}
 		if(event.type == SDL_MOUSEBUTTONDOWN){
 			Vector2 offset;
-			if(m_level->CheckCollision(offset, m_sprite_manager, m_deltatime)){
-				//m_duck->SetPosition(offset + m_duck->GetPosition());
-				
+
+			if(m_menustate) {
+				if(m_menu_state->CheckCrosshairCollision(offset, m_sprite_manager)){
+					mgr.SetState("GameStateA");
+					//m_duck->SetPosition(offset + m_duck->GetPosition());
+				}
+			}
+
+			if(m_gamestate) {
+				if(m_level->CheckCollision(offset, m_sprite_manager, m_deltatime)){
+					//m_duck->SetPosition(offset + m_duck->GetPosition());
+				}
 			}
 		}
 	};

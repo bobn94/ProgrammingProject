@@ -9,6 +9,8 @@ class DuckObject;
 class Collider;
 class Level;
 class Input;
+class MenuState;
+class OptionsState;
 
 
 class Engine {
@@ -28,9 +30,14 @@ private:
 	Level* m_level;
 	DrawManager *m_draw_manager;
 	SpriteManager *m_sprite_manager;
+	MenuState *m_menu_state;
+	OptionsState *m_options_state;
 	
 	Log m_log;
 	
+	bool m_menustate;
+	bool m_gamestate;
+
 	bool m_running;
 	bool m_start;
 	int m_width;
