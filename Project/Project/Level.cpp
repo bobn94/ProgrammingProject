@@ -194,7 +194,7 @@ bool Level::CheckCollision(Vector2 &offset, SpriteManager* sprite_manager){
 	}
 }
 void Level::SpawnCrosshair(SpriteManager *sprite_manager){
-	Sprite *sprite = sprite_manager->Load("crosshair.png", 0, 0, 32, 32);
+	Sprite *sprite = sprite_manager->Load("Crosshair.png", 0, 0, 32, 32);
 	Collider *collider = new Collider;
 	collider->m_position = Vector2(0,0);
 	collider->m_extention = Vector2(32, 32);

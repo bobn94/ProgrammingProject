@@ -67,7 +67,6 @@ private:
 
 
 	std::string m_spritemap_filename;
-	std::map<char, Cords> m_tile_cords;
 	std::map<char, Sprite*> m_sprite;
 	std::vector<GameObject*> m_objects;
 
