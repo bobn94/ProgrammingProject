@@ -16,6 +16,9 @@
 #include "Engine.h"
 #include "Input.h"
 
+#include "SoundManager.h"
+#include "MusicClip.h"
+
 #include "StateManager.h"
 
 #include "MenuState.h"
@@ -34,8 +37,6 @@ Engine::Engine() : m_log("log.txt") {
 	m_menustate = false;
 	m_gamestate = false;
 
-	//m_mouse = nullptr;
-	//m_keyboard = nullptr;
 	m_running = false;
 	m_width = 0;
 	m_height = 0;
@@ -93,17 +94,13 @@ void Engine::Run() {
 		mgr.Attach(new OptionsState());
 		mgr.SetState("MenuState");	
 
+	
 	while(m_running) {
 	while (mgr.IsRunning()) {
 		UpdateDeltatime();
 		UpdateEvents();
 
 		m_draw_manager->Clear();		
-
-	/*if(!mgr.m_current->IsType("GameStateA")) {
-		mgr.Update(0.01f, m_sprite_manager);
-		mgr.Draw(m_draw_manager);
-		}*/
 
 		if(m_menu_state->m_changetoGameState) {
 			mgr.SetState("GameStateA");	
@@ -120,6 +117,7 @@ void Engine::Run() {
 			m_menu_state->Update(m_deltatime, m_sprite_manager);
 			m_menu_state->Draw(m_draw_manager);
 			m_menustate = true;
+
 		} else if (mgr.m_current->IsType("OptionsState") && !m_options_state->m_changetoGameState) {
 			m_options_state->Update(m_deltatime, m_sprite_manager);
 			m_options_state->Draw(m_draw_manager);
@@ -127,8 +125,8 @@ void Engine::Run() {
 		} else {
 		m_level->UpdateLevel(m_deltatime, m_sprite_manager);
 		m_level->Draw(m_draw_manager);
-			m_gamestate = true;
-			}
+		m_gamestate = true;
+		}
 		
 
 
@@ -199,18 +197,23 @@ void Engine::UpdateEvents() {
 		if(event.type == SDL_QUIT) {
 			m_running = false;
 		}
+		
+		if(event.type == SDLK_ESCAPE) {
+			m_running = false;
+		}
+
+
 		if(event.type == SDL_MOUSEBUTTONDOWN){
 			Vector2 offset;
 
 			if(m_menustate) {
 				if(m_menu_state->CheckCrosshairCollision(offset, m_sprite_manager)){
-					
 				}
 			}
 
 			if(m_gamestate) {
 				if(m_level->CheckCollision(offset, m_sprite_manager, m_deltatime)){
-					//m_duck->SetPosition(offset + m_duck->GetPosition());
+			
 				}
 			}
 

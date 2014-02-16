@@ -12,6 +12,8 @@ class Input;
 class MenuState;
 class OptionsState;
 
+class SoundManager;
+class MusicClip;
 
 class Engine {
 public:
@@ -50,4 +52,7 @@ private:
 	Input *m_input;
 	Vector2 m_duckPos;
 	Vector2 m_duckExt;
+
+	SoundManager *m_sound_manager;
+	MusicClip *m_music;
 };

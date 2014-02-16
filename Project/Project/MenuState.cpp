@@ -12,6 +12,10 @@
 #include "MenuState.h"
 #include "StateManager.h"
 
+#include "SoundManager.h"
+#include "MusicClip.h"
+
+
 
 MenuState::MenuState() {
 	m_done = false;
@@ -68,11 +72,17 @@ void MenuState::Initialize(SpriteManager* m_sprite_manager) {
 	m_optionstext = new GameObject(sprite, collider);
 	m_optionstext->SetPosition(Vector2(400, 635));
 
+	m_sound_manager = new SoundManager();
+	m_music = m_sound_manager->CreateMusic("../data/sounds/start.wav");
+
+	m_music->Play();
+
 }
 
 void MenuState::Draw(DrawManager* m_draw_manager) {
 	TTF_Init();
-	
+
+
 	m_draw_manager->Draw(m_BackgroundSprite, 0, 0);
 
 	

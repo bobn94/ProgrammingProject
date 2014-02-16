@@ -13,7 +13,7 @@ SoundClip::~SoundClip() {
 };
 
 SoundClip::SoundClip(Mix_Chunk* p_xClip) {
-	m_xClip = nullptr;
+	m_xClip = p_xClip;
 	m_iChannel = -1;
 };
 

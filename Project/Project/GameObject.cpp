@@ -1,7 +1,7 @@
 
 #include "Sprite.h"
 #include "GameObject.h"
-//#include "Collider.h"
+
 
 GameObject::GameObject(Sprite *sprite, Collider *collider)
 :m_position(0.0f, 0.0f)

@@ -13,7 +13,7 @@ MusicClip::~MusicClip() {
 };
 
 MusicClip::MusicClip(Mix_Music* p_xClip) {
-	m_xClip = nullptr;
+	m_xClip = p_xClip;
 	m_iChannel = -1;
 };
 

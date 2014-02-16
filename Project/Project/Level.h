@@ -14,6 +14,9 @@ class GameObject;
 class DrawManager;
 class Mouse;
 
+class SoundManager;
+class SoundClip;
+
 class Level{
 	friend class Engine;
 	struct Cords{
@@ -83,4 +86,9 @@ private:
 	int m_currentDuck;
 	bool m_isDuckSpawned;
 	bool shouldEnd;
+
+	SoundManager *m_sound_manager;
+	SoundClip* m_drop;
+	SoundClip* m_quack;
+	SoundClip* m_shoot;
 };

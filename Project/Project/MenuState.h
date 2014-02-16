@@ -14,6 +14,11 @@ class Sprite;
 class DrawManager;
 class GameObject;
 
+
+class SoundManager;
+class MusicClip;
+
+
 class MenuState : public State {
 public:
 	MenuState();
@@ -32,6 +37,11 @@ public:
 	void SpawnMenuCrosshair(SpriteManager *sprite_manager);
 	bool CheckCrosshairCollision(Vector2 &offset, SpriteManager* sprite_manager);
 
+
+
+	SoundManager *m_sound_manager;
+	MusicClip *m_music;
+
 private:
 
 
@@ -48,4 +58,3 @@ private:
 	bool m_done;
 	std::string m_next_state;
 };
-

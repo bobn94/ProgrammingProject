@@ -1,4 +1,3 @@
-//#pragma comment(lib, "SDL2_ttf.lib")
 #include <fstream>
 #include <SDL.h>
 #include <sstream>
@@ -9,6 +8,8 @@
 #include "DuckObject.h"
 #include "Collider.h"
 #include "Input.h"
+#include "SoundManager.h"
+#include "SoundClip.h"
 
 Level::Level(){
 	m_mouse = new Mouse;
@@ -17,7 +18,6 @@ Level::~Level(){
 	auto it = m_objects.begin();
 	while(it != m_objects.end()){
 		delete (*it)->GetSprite();
-		//delete (*it)->GetCollider();
 		delete (*it);
 		++it;
 	}
@@ -103,7 +103,7 @@ bool Level::CheckCollision(Vector2 &offset, SpriteManager* sprite_manager, float
 	
 	if(SDL_BUTTON(1) && m_ammo > 0 && !m_duck->isHit){
 		m_ammo -= 1;
-		//shoot->Play();
+		m_shoot->Play();
 		for (auto i = 0UL; i < m_objects.size(); i++){
 			if(m_objects[i]->HasCollider()) {
 				Vector2 off;
@@ -254,6 +254,7 @@ void Level::UpdateLevel(float deltatime, SpriteManager* spritemanager){
 		delete m_duck->GetCollider();
 		delete m_duck;
 		m_duck = nullptr;
+		m_drop->Play();
 		SpawnDuck(spritemanager);
 	}
 	
@@ -266,18 +267,9 @@ void Level::ChangeAmmo(bool set, int value){
 		m_ammo += value;
 	}
 }
-/*void Level::DrawText(SDL_Surface* screen,const  char* string, int size, int x, int y, int fR, int fG, int fB, int bR, int bG, int bB){
-	
-	TTF_Font* font = TTF_OpenFont("../data/fonts/arial.ttf", size);
-	SDL_Color foregroundColor = { fR, fG, fB }; 
-	SDL_Color backgroundColor = { bR, bG, bB };
-	SDL_Surface* textSurface = TTF_RenderText_Shaded(font, string, 
-	foregroundColor, backgroundColor);
-	SDL_Rect textLocation = { x, y, 0, 0 };
-	SDL_BlitSurface(textSurface, NULL, screen, &textLocation);
-	SDL_FreeSurface(textSurface);
-	TTF_CloseFont(font);
-}*/
+
+
+
 void Level::SetScore(int score){
 	m_score = score;	
 }
@@ -304,6 +296,11 @@ void Level::InitLevel(SpriteManager *sprite_manager){
 	m_RedDuckSprite = sprite_manager->Load("RedDuck.png", 0, 0, 28, 28);
 	m_WhiteDuckSprite = sprite_manager->Load("WhiteDuck.png", 0, 0, 28, 28);
 
+
+	m_sound_manager = new SoundManager();
+	m_drop = m_sound_manager->CreateSound("../data/sounds/drop.wav");
+	m_quack = m_sound_manager->CreateSound("../data/sounds/quack.wav");
+	m_shoot = m_sound_manager->CreateSound("../data/sounds/shoot.wav");
 }
 void Level::SpawnDuck(SpriteManager *spritemanager){
 	Collider* collider = new Collider(
@@ -313,6 +310,7 @@ void Level::SpawnDuck(SpriteManager *spritemanager){
 	m_duck->SetPosition(m_duck->GetSpawnPosition());
 	m_duck->LoadAnimations(spritemanager);
 	m_duck->Randomize();
+	m_quack->Play();
 }
 void Level::Defeat(){
 	CheckHighscore();
