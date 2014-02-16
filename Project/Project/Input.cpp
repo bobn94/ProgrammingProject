@@ -1,6 +1,7 @@
-
+#pragma once
+#include "Vector2.h"
 #include "Input.h"
-
+#include "SDL.h"
 
 KeyBoard::KeyBoard(){
 	for(int i = 0; i < 256; i++){
@@ -40,7 +41,24 @@ Mouse::Mouse(){
 		return m_current[button] && !m_previous[button];
 	}
 	void Mouse::PostUpdate(){
+		
+		int x,y;
+		SDL_GetMouseState(&x, &y);
+		m_x = x;
+		m_y = y;
 		for(int i = 0; i < MB_COUNT; i++){
 		m_previous[i] = m_current[i];
+		if(SDL_BUTTON(1)){
+			m_current[0] = true;
+		}
+		else{
+			m_current[0] = false;
+		}
+		if(SDL_BUTTON(2)){
+			m_current[1] = true;
+		}
+		else{
+			m_current[1] = false;
+		}
 	}
 	}

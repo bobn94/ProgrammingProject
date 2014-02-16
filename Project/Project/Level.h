@@ -12,6 +12,7 @@ class SpriteManager;
 class Sprite;
 class GameObject;
 class DrawManager;
+class Mouse;
 
 class Level{
 	friend class Engine;
@@ -68,7 +69,7 @@ private:
 
 	DuckObject *m_duck;
 
-
+	Mouse* m_mouse;
 
 	std::string m_spritemap_filename;
 	std::map<char, Sprite*> m_sprite;

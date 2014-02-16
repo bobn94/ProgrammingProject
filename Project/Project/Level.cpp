@@ -8,9 +8,10 @@
 #include "GameObject.h"
 #include "DuckObject.h"
 #include "Collider.h"
+#include "Input.h"
 
 Level::Level(){
-	
+	m_mouse = new Mouse;
 }
 Level::~Level(){
 	auto it = m_objects.begin();
@@ -20,6 +21,8 @@ Level::~Level(){
 		delete (*it);
 		++it;
 	}
+	delete m_mouse;
+	m_mouse = nullptr;
 
 }
 void Level::Draw(DrawManager *drawmanager){
@@ -235,13 +238,12 @@ void Level::UpdateLevel(float deltatime, SpriteManager* spritemanager){
 		SpawnDuck(spritemanager);
 		m_isDuckSpawned = true;
 	}
-	int x, y;
-	SDL_GetMouseState(&x, &y);
-	m_crosshairPos.m_x = x -16;
-	m_crosshairPos.m_y = y -16;
+	m_mouse->PostUpdate();
+	m_crosshairPos.m_x = m_mouse->GetX() -16;
+	m_crosshairPos.m_y = m_mouse->GetY() -16;
 	m_objects[0]->SetPosition(m_crosshairPos);
-	m_objects[0]->m_collider->m_position.m_x = x -16;
-	m_objects[0]->m_collider->m_position.m_y = y -16;
+	m_objects[0]->m_collider->m_position.m_x = m_mouse->GetX() -16;
+	m_objects[0]->m_collider->m_position.m_y = m_mouse->GetY() -16;
 	m_duck->Timer(deltatime);
 	m_duck->Update(deltatime);
 	m_duck->m_collider->m_position = m_duck->m_position;

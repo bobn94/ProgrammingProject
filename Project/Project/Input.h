@@ -29,7 +29,7 @@ public:
 	int GetY() const;
 	bool IsDown(EmouseButton button) const;
 	bool IsDownOnce(EmouseButton button) const;
-	void Mouse::PostUpdate();
+	void PostUpdate();
 	
 private:
 	bool m_current[MB_COUNT];
