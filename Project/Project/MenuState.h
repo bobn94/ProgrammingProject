@@ -44,7 +44,7 @@ public:
 
 private:
 
-
+	Mouse* m_mouse;
 	Vector2 m_crosshairPos;
 	Sprite* m_BackgroundSprite;
 	std::vector<GameObject*> m_objects;

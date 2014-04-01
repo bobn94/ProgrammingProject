@@ -11,7 +11,7 @@
 #include "Collider.h"
 #include "MenuState.h"
 #include "StateManager.h"
-
+#include "Input.h"
 #include "SoundManager.h"
 #include "MusicClip.h"
 
@@ -42,9 +42,8 @@ void MenuState::Exit() {
 };
 
 bool MenuState::Update(float deltatime, SpriteManager* m_sprite_manager) {
-	
-	int x, y;
-	SDL_GetMouseState(&x, &y);
+	m_mouse->PostUpdate();
+	int x = m_mouse->GetX(), y = m_mouse->GetY();
 	m_crosshairPos.m_x = x -16;
 	m_crosshairPos.m_y = y -16;
 	m_objects[0]->SetPosition(m_crosshairPos);
@@ -54,7 +53,7 @@ bool MenuState::Update(float deltatime, SpriteManager* m_sprite_manager) {
 
 void MenuState::Initialize(SpriteManager* m_sprite_manager) {
 	SpawnMenuCrosshair(m_sprite_manager);
-	
+	m_mouse = new Mouse;
 	m_BackgroundSprite = m_sprite_manager->Load("Menubackground.png", 0, 0, 1024, 960);
 
 
@@ -189,7 +188,7 @@ void MenuState::SpawnMenuCrosshair(SpriteManager *sprite_manager){
  bool MenuState::CheckCrosshairCollision(Vector2 &offset, SpriteManager* sprite_manager) {
 	StateManager mgr;
 	 
-	 if(SDL_BUTTON(1)) {
+	if(m_mouse->IsDown(MB_LEFT)) {
 		for (auto i = 0UL; i < m_objects.size(); i++){
 			if(m_objects[i]->HasCollider()) {
 				Vector2 off;

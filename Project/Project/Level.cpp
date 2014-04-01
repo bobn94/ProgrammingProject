@@ -101,7 +101,7 @@ void Level::Draw(DrawManager *drawmanager){
 }
 bool Level::CheckCollision(Vector2 &offset, SpriteManager* sprite_manager, float deltatime){
 	
-	if(SDL_BUTTON(1) && m_ammo > 0 && !m_duck->isHit){
+	if(m_mouse->IsDown(MB_LEFT) && m_ammo > 0 && !m_duck->isHit){
 		m_ammo -= 1;
 		m_shoot->Play();
 		for (auto i = 0UL; i < m_objects.size(); i++){
@@ -281,7 +281,7 @@ void Level::InitLevel(SpriteManager *sprite_manager){
 	shouldEnd = false;
 	SpawnCrosshair(sprite_manager);
 	m_currentDuck = 0;
-	
+	m_mouse = new Mouse;
 	for(int i = 0; i <= 9; ++i){
 		m_ducksHit[i] = 'W';
 	}
