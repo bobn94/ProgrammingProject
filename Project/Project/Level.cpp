@@ -108,70 +108,70 @@ bool Level::CheckCollision(Vector2 &offset, SpriteManager* sprite_manager, float
 			if(m_objects[i]->HasCollider()) {
 				Vector2 off;
 				if(m_objects[i]->GetCollider()->Overlap(*m_duck->GetCollider(), off)){
-
-					if((off.m_x != 0 && off.m_x != offset.m_x) || (off.m_y != 0 && off.m_y != offset.m_y)){
-						offset += off;
+					if (m_duck->m_duckType >= 0 && m_duck->m_duckType <= 3){
+					m_score += (500 * m_currentRound);
+					} else if (m_duck->m_duckType >= 4 && m_duck->m_duckType <= 5) {
+					m_score += (1000 * m_currentRound);
 					}
+					else {
+					m_score += (1500 * m_currentRound);
+					}
+					m_duck->isHit = true;
+					m_ducksHit[m_currentDuck] = 'R';
+					m_ammo = 3;
+					if(m_currentDuck == 9){
+						for(int i = 0; i <= 9; ++i){
+							for(int j = 0; j <= 9; ++j){
+								if(m_ducksHit[j+1] == 'R' && m_ducksHit[j] == 'w'){
+									int temp;
+									temp = m_ducksHit[j];
+									m_ducksHit[j] = m_ducksHit[j+1];
+									m_ducksHit[j+1] = temp;
+								}
+							}
+						}
+						int ducksHit = 0;
+						for(int i = 0; i <= 9; ++i){
+							if(m_ducksHit[i] == 'R'){
+								ducksHit += 1;
+							}
+						}
+					
+						for(int i = 0; i <= 9; ++i){
+							m_ducksHit[i] = 'W';
+						
+						}		
+						m_currentDuck = 0;
+						if(ducksHit >= 7){
+							m_currentRound += 1;
+							if(m_currentRound == 11){
+							Victory();
+							m_currentRound = 1;
+						}
+						}
+						else{
+							Defeat();
+							m_currentRound = 1;
+						}
+					}
+					else{
+						m_currentDuck += 1;
+						if(m_currentRound == 11){
+							Victory();
+							m_currentRound = 1;
+						}
+					}
+
+					return true;
+				}
+					/*if((off.m_x != 0 && off.m_x != offset.m_x) || (off.m_y != 0 && off.m_y != offset.m_y)){
+						offset += off;
+					}*/
 				}
 			}
 			if(offset.Length() > 0.0f){
 				
-				if (m_duck->m_duckType >= 0 && m_duck->m_duckType <= 3){
-					m_score += (500 * m_currentRound);
-				} else if (m_duck->m_duckType >= 4 && m_duck->m_duckType <= 5) {
-					m_score += (1000 * m_currentRound);
-				}
-				else {
-					m_score += (1500 * m_currentRound);
-				}
-				m_duck->isHit = true;
-				m_ducksHit[m_currentDuck] = 'R';
-				m_ammo = 3;
-				if(m_currentDuck == 9){
-					for(int i = 0; i <= 9; ++i){
-						for(int j = 0; j <= 9; ++j){
-							if(m_ducksHit[j+1] == 'R' && m_ducksHit[j] == 'w'){
-								int temp;
-								temp = m_ducksHit[j];
-								m_ducksHit[j] = m_ducksHit[j+1];
-								m_ducksHit[j+1] = temp;
-							}
-						}
-					}
-					int ducksHit = 0;
-					for(int i = 0; i <= 9; ++i){
-						if(m_ducksHit[i] == 'R'){
-							ducksHit += 1;
-						}
-					}
-					
-					for(int i = 0; i <= 9; ++i){
-						m_ducksHit[i] = 'W';
-						
-					}		
-					m_currentDuck = 0;
-					if(ducksHit >= 7){
-						m_currentRound += 1;
-						if(m_currentRound == 11){
-						Victory();
-						m_currentRound = 1;
-					}
-					}
-					else{
-						Defeat();
-						m_currentRound = 1;
-					}
-				}
-				else{
-					m_currentDuck += 1;
-					if(m_currentRound == 11){
-						Victory();
-						m_currentRound = 1;
-					}
-				}
-
-				return true;
-				}
+				
 			}
 		}
 		if(m_ammo == 0){

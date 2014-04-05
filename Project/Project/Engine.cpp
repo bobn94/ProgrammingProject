@@ -81,7 +81,7 @@ bool Engine::Initialize() {
 	m_level->InitLevel(m_sprite_manager);
 	
 	
-	SDL_ShowCursor( SDL_DISABLE );
+	//SDL_ShowCursor( SDL_DISABLE );
 	m_running = true;
 	
 	return true;

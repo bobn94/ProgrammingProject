@@ -63,6 +63,7 @@ void MenuState::Initialize(SpriteManager* m_sprite_manager) {
 	collider->m_extention = Vector2(245, 41);
 	m_startgametext = new GameObject(sprite, collider);
 	m_startgametext->SetPosition(Vector2(350, 550));
+	m_startgametext->GetCollider()->m_position = Vector2(350, 550);
 
 	sprite = m_sprite_manager->Load("optionscollider.png", 0, 0, 245, 39);
 	collider = new Collider;
@@ -70,6 +71,7 @@ void MenuState::Initialize(SpriteManager* m_sprite_manager) {
 	collider->m_extention = Vector2(245, 39);
 	m_optionstext = new GameObject(sprite, collider);
 	m_optionstext->SetPosition(Vector2(400, 635));
+	m_optionstext->GetCollider()->m_position = Vector2(400, 635);
 
 	m_sound_manager = new SoundManager();
 	m_music = m_sound_manager->CreateMusic("../data/sounds/start.wav");
@@ -192,33 +194,35 @@ void MenuState::SpawnMenuCrosshair(SpriteManager *sprite_manager){
 		for (auto i = 0UL; i < m_objects.size(); i++){
 			if(m_objects[i]->HasCollider()) {
 				Vector2 off;
-				if(m_objects[i]->GetCollider()->Overlap(m_startgametext->GetCollider(), Vector2(m_objects[i]->GetPosition().m_x - m_objects[i]->GetCollider()->m_extention.m_x / 2, m_objects[i]->GetPosition().m_y - m_objects[i]->GetCollider()->m_extention.m_y / 2), m_objects[i]->GetCollider()->m_extention.m_x / 2, off)){
+				
+				if(m_objects[i]->GetCollider()->Overlap(m_startgametext->GetCollider(), Vector2(m_mouse->GetX(), m_mouse->GetY()), 28, off)){
 
-					if((off.m_x != 0 && off.m_x != offset.m_x) || (off.m_y != 0 && off.m_y != offset.m_y)){
-						offset += off;
-					}
+					m_changetoGameState = true;
+					return true;
 				}
 
-				if(offset.Length() > 0.0f && m_GoGamestate){
-				m_changetoGameState = true;
-				return true;
-			}
+				/*if(offset.Length() > 0.0f && m_GoGamestate){
+					m_changetoGameState = true;
+					return true;
+				}*/
 
-				if(m_objects[i]->GetCollider()->Overlap(*m_optionstext->GetCollider(), off)){
-
-					if((off.m_x != 0 && off.m_x != offset.m_x) || (off.m_y != 0 && off.m_y != offset.m_y)){
+				if(m_objects[i]->GetCollider()->Overlap(m_optionstext->GetCollider(), Vector2(m_mouse->GetX(), m_mouse->GetY()), 28, off)){
+					mgr.SetState("OptionsState");
+					m_changetoOptionsState = true;
+					return true;
+					/*if((off.m_x != 0 && off.m_x != offset.m_x) || (off.m_y != 0 && off.m_y != offset.m_y)){
 						offset += off;
-					} 
+					} */
 				}
 
 			}
 
 
-			if(offset.Length() > 0.0f && m_GoOptionsstate){
+			/*if(offset.Length() > 0.0f && m_GoOptionsstate){
 				mgr.SetState("OptionsState");
 				m_changetoOptionsState = true;
 				return true;
-			}
+			}*/
 		return false;
 	}
 	}

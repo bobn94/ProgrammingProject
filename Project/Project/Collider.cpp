@@ -77,19 +77,19 @@ bool Collider::Overlap(Collider *map, Vector2 origo1, float radius1, Vector2 &of
         if (j==0)
         {
 			A = map->m_position;
-			B = Vector2(map->m_position.m_x, map->m_position.m_x + map->m_extention.m_x);
+			B = Vector2(map->m_position.m_x, map->m_position.m_y + map->m_extention.m_y);
         }
         else if(j == 1)
         {
-            A = Vector2(map->m_position.m_x, map->m_position.m_x + map->m_extention.m_x);
-			B = Vector2(map->m_position.m_x + map->m_extention.m_x, map->m_position.m_x + map->m_extention.m_x);
+            A = Vector2(map->m_position.m_x, map->m_position.m_y + map->m_extention.m_y);
+			B = Vector2(map->m_position.m_x + map->m_extention.m_x, map->m_position.m_y + map->m_extention.m_y);
         }
 		else if(j == 2){
-			A = Vector2(map->m_position.m_x + map->m_extention.m_x, map->m_position.m_x + map->m_extention.m_x);
-			B = Vector2(map->m_position.m_x + map->m_extention.m_x, map->m_position.m_x);
+			A = Vector2(map->m_position.m_x + map->m_extention.m_x, map->m_position.m_y + map->m_extention.m_y);
+			B = Vector2(map->m_position.m_x + map->m_extention.m_x, map->m_position.m_y);
 		}
 		else if(j == 3){
-			A = Vector2(map->m_position.m_x + map->m_extention.m_x, map->m_position.m_x);
+			A = Vector2(map->m_position.m_x + map->m_extention.m_x, map->m_position.m_y);
 			B = map->m_position;
 		}
         Vector2 C = origo1;
@@ -100,9 +100,9 @@ bool Collider::Overlap(Collider *map, Vector2 origo1, float radius1, Vector2 &of
         Vector2 l = t - f;
             
             
-        float a = l.m_x * l.m_x + l.m_x * l.m_x ;
-        float b = 2*(l.m_x * f.m_x + l.m_x * f.m_x) ;
-        float c = f.m_x * f.m_x + f.m_x * f.m_x - radius1*radius1 ;
+        float a = l.m_x * l.m_x + l.m_y * l.m_y ;
+        float b = 2*(l.m_x * f.m_x + l.m_y * f.m_y) ;
+        float c = f.m_x * f.m_x + f.m_y * f.m_y - radius1*radius1 ;
             
         float discriminant = b*b-4*a*c;
         if( discriminant < 0 )
@@ -125,13 +125,13 @@ bool Collider::Overlap(Collider *map, Vector2 origo1, float radius1, Vector2 &of
 					offset.m_x -= 1;
 				}
 				else if(j == 1){
-					offset.m_x += 1;
+					offset.m_y += 1;
 				}
 				else if(j == 2){
 					offset.m_x += 1;
 				}
 				else if(j == 3){
-					offset.m_x -= 1;
+					offset.m_y -= 1;
 				}
                 return true ;
 					
@@ -142,13 +142,13 @@ bool Collider::Overlap(Collider *map, Vector2 origo1, float radius1, Vector2 &of
 					offset.m_x -= 1;
 				}
 				else if(j == 1){
-					offset.m_x += 1;
+					offset.m_y += 1;
 				}
 				else if(j == 2){
 					offset.m_x += 1;
 				}
 				else if(j == 3){
-					offset.m_x -= 1;
+					offset.m_y -= 1;
 				}
                 return true ;
             }
