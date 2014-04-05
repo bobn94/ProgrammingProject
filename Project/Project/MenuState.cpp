@@ -192,7 +192,7 @@ void MenuState::SpawnMenuCrosshair(SpriteManager *sprite_manager){
 		for (auto i = 0UL; i < m_objects.size(); i++){
 			if(m_objects[i]->HasCollider()) {
 				Vector2 off;
-				if(m_objects[i]->GetCollider()->Overlap(*m_startgametext->GetCollider(), off)){
+				if(m_objects[i]->GetCollider()->Overlap(m_startgametext->GetCollider(), Vector2(m_objects[i]->GetPosition().m_x - m_objects[i]->GetCollider()->m_extention.m_x / 2, m_objects[i]->GetPosition().m_y - m_objects[i]->GetCollider()->m_extention.m_y / 2), m_objects[i]->GetCollider()->m_extention.m_x / 2, off)){
 
 					if((off.m_x != 0 && off.m_x != offset.m_x) || (off.m_y != 0 && off.m_y != offset.m_y)){
 						offset += off;
