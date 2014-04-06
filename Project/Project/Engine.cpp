@@ -50,8 +50,8 @@ Engine::~Engine() {
 };
 
 bool Engine::Initialize() {
-	m_width = 1024;
-	m_height = 960;
+	
+	LoadConfigFile("../data/config/ConfigFile.txt");
 	
 	SDL_Init(SDL_INIT_EVERYTHING);
 	m_window = SDL_CreateWindow("Duck Hunt", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
@@ -223,4 +223,31 @@ void Engine::UpdateEvents() {
 			}
 		}
 	};
+};
+
+bool Engine::LoadConfigFile(const std::string &filename){
+	std::ifstream stream;
+	stream.open(filename.c_str());
+
+	if(!stream.is_open()){
+		return false;
+	}
+
+	std::string row;
+	stream >> row;
+
+	while(!stream.eof()){
+		std::getline(stream, row);
+		if(row.length() == 0){
+			continue;
+		}
+
+		std::stringstream ss(row);
+
+		ss >> m_width;
+		ss >> m_height;
+		}
+		
+	stream.close();
+	return true;
 };

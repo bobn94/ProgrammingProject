@@ -81,22 +81,21 @@ void OptionsState::Draw(DrawManager* m_draw_manager) {
 	SDL_Color m_backgroundColor = { 0, 0, 0 };
 	SDL_Surface* screen = TTF_RenderText_Shaded(m_font, "Duck", m_foregroundColor, m_backgroundColor);
 	m_draw_manager->Draw(screen, 170, 100);
-	SDL_FreeSurface(screen);
+
 	screen = TTF_RenderText_Shaded(m_font, "Hunt", m_foregroundColor, m_backgroundColor);
 	m_draw_manager->Draw(screen, 320, 300);
-	SDL_FreeSurface(screen);
+
 
 
 	SDL_Color m_foregroundColor2 = { 255, 255, 255 };
 	m_font = TTF_OpenFont("../data/fonts/emulogic.ttf", 35);
-	screen = TTF_RenderText_Shaded(m_font, "Reset highscore", m_foregroundColor2, m_backgroundColor);
-	m_draw_manager->Draw(screen, 255, 550);
-	SDL_FreeSurface(screen);
+	screen = TTF_RenderText_Shaded(m_font, "Lower Volume", m_foregroundColor2, m_backgroundColor);
+	m_draw_manager->Draw(screen, 310, 550);
 
 
 	screen = TTF_RenderText_Shaded(m_font, "Start game", m_foregroundColor2, m_backgroundColor);
 	m_draw_manager->Draw(screen, 350, 630);
-	SDL_FreeSurface(screen);
+	
 
 
 	m_draw_manager->Draw(
@@ -158,6 +157,8 @@ void OptionsState::Draw(DrawManager* m_draw_manager) {
 
 std::string OptionsState::Next() {
 	return m_next_state;
+	m_done = true;
+	isOn = false;
 };
 
 bool OptionsState::IsType(const std::string &type) {
@@ -193,6 +194,7 @@ void OptionsState::SpawnMenuCrosshair(SpriteManager *sprite_manager){
 
 				if(offset.Length() > 0.0f && m_resetit){
 				m_resetHighScore = true;
+				std::cout << "Hello" << std::endl;
 				return true;
 			}
 
@@ -209,6 +211,8 @@ void OptionsState::SpawnMenuCrosshair(SpriteManager *sprite_manager){
 			if(offset.Length() > 0.0f && m_GoGamestate){
 				mgr.SetState("GameState");
 				m_changetoGameState = true;
+				m_done = true;
+				isOn = false;
 				return true;
 			}
 		return false;
@@ -217,7 +221,7 @@ void OptionsState::SpawnMenuCrosshair(SpriteManager *sprite_manager){
  }
 
 
- void OptionsState::ResetHighscore(){
+void OptionsState::ResetHighscore(){
 	if (m_resetHighScore = true) {
 		std::ofstream ostream("../data/score/score.txt");
 		ostream.clear();

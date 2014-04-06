@@ -150,10 +150,10 @@ void MenuState::Draw(DrawManager* m_draw_manager) {
 	SDL_Color m_foregroundColor3 = { 64, 228, 48 };
 	screen = TTF_RenderText_Shaded(m_font, "Highscore: ", m_foregroundColor3, m_backgroundColor);
 	m_draw_manager->Draw(screen, 230, 750);
-	SDL_FreeSurface(screen);
+	
 	screen = TTF_RenderText_Shaded(m_font, hisc.str().c_str(), m_foregroundColor3, m_backgroundColor);
 	m_draw_manager->Draw(screen, 630, 750);
-	SDL_FreeSurface(screen);
+
 
 
 	for(auto i = 0UL; i < m_objects.size(); i++){
@@ -169,6 +169,7 @@ void MenuState::Draw(DrawManager* m_draw_manager) {
 
 std::string MenuState::Next() {
 	return m_next_state;
+	m_done = true;
 };
 
 bool MenuState::IsType(const std::string &type) {
@@ -209,6 +210,7 @@ void MenuState::SpawnMenuCrosshair(SpriteManager *sprite_manager){
 				if(m_objects[i]->GetCollider()->Overlap(m_optionstext->GetCollider(), Vector2(m_mouse->GetX(), m_mouse->GetY()), 28, off)){
 					mgr.SetState("OptionsState");
 					m_changetoOptionsState = true;
+					m_done = true;
 					return true;
 					/*if((off.m_x != 0 && off.m_x != offset.m_x) || (off.m_y != 0 && off.m_y != offset.m_y)){
 						offset += off;

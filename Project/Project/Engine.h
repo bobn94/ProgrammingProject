@@ -27,6 +27,8 @@ public:
 private:
 	void UpdateEvents();
 	void UpdateDeltatime();
+
+	bool LoadConfigFile(const std::string &filename);
 private:
 	struct SDL_Window *m_window;
 	Level* m_level;
@@ -34,6 +36,7 @@ private:
 	SpriteManager *m_sprite_manager;
 	MenuState *m_menu_state;
 	OptionsState *m_options_state;
+
 	
 	Log m_log;
 	
@@ -43,8 +46,10 @@ private:
 
 	bool m_running;
 	bool m_start;
+
 	int m_width;
 	int m_height;
+
 	float m_deltatime;
 	unsigned int m_ticks;
 	Collider *m_collider;

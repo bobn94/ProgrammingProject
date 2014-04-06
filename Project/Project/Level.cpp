@@ -68,17 +68,17 @@ void Level::Draw(DrawManager *drawmanager){
 	TTF_Font* m_font = TTF_OpenFont("../data/fonts/emulogic.ttf", 25);	//Berättar att vi ska använda ariblk som ligger i ../data/fonts/, och använda den med storlek 20.
 	SDL_Surface* screen = TTF_RenderText_Shaded(m_font, strm.str().c_str(), m_foregroundColor, m_backgroundColor);
 	drawmanager->Draw(screen, 765, 830);
-	SDL_FreeSurface(screen);
+	
 	screen = TTF_RenderText_Shaded(m_font, "Score", m_foregroundColor, m_backgroundColor);	//Skriver ut Score
 	drawmanager->Draw(screen, 765, 860);
-	SDL_FreeSurface(screen);
+	
 	m_font = TTF_OpenFont("../data/fonts/emulogic.ttf", 20);
 	screen = TTF_RenderText_Shaded(m_font, "R =", m_foregroundColor, m_backgroundColor);	//Skriver ut Score
 	drawmanager->Draw(screen, 98, 770);
-	SDL_FreeSurface(screen);
+	
 	screen = TTF_RenderText_Shaded(m_font, rnd.str().c_str(), m_foregroundColor, m_backgroundColor);	//Skriver ut Score
 	drawmanager->Draw(screen, 150, 770);
-	SDL_FreeSurface(screen);
+	
 	int ducksPos_x = 362;
 		for(int i = 0; i <= 9; ++i){
 			if(m_ducksHit[i] == 'R'){	
