@@ -11,7 +11,7 @@
 #include "Collider.h"
 #include "MenuState.h"
 #include "StateManager.h"
-#include "Input.h"
+#include "InputManager.h"
 #include "SoundManager.h"
 #include "MusicClip.h"
 
@@ -29,6 +29,8 @@ MenuState::MenuState() {
 		delete (*it);
 		++it;
 	}
+
+	m_sound_manager = new SoundManager();
 };
 
 
@@ -92,22 +94,22 @@ void MenuState::Draw(DrawManager* m_draw_manager) {
 	SDL_Color m_backgroundColor = { 0, 0, 0 };
 	SDL_Surface* screen = TTF_RenderText_Shaded(m_font, "Duck", m_foregroundColor, m_backgroundColor);
 	m_draw_manager->Draw(screen, 170, 100);
-	SDL_FreeSurface(screen);
+
 	screen = TTF_RenderText_Shaded(m_font, "Hunt", m_foregroundColor, m_backgroundColor);
 	m_draw_manager->Draw(screen, 320, 300);
-	SDL_FreeSurface(screen);
+
 
 
 	SDL_Color m_foregroundColor2 = { 255, 255, 255 };
 	m_font = TTF_OpenFont("../data/fonts/emulogic.ttf", 35);
 	screen = TTF_RenderText_Shaded(m_font, "Start Game", m_foregroundColor2, m_backgroundColor);
 	m_draw_manager->Draw(screen, 350, 550);
-	SDL_FreeSurface(screen);
+	
 
 
 	screen = TTF_RenderText_Shaded(m_font, "Options", m_foregroundColor2, m_backgroundColor);
 	m_draw_manager->Draw(screen, 400, 630);
-	SDL_FreeSurface(screen);
+
 
 
 	m_draw_manager->Draw(
@@ -169,7 +171,6 @@ void MenuState::Draw(DrawManager* m_draw_manager) {
 
 std::string MenuState::Next() {
 	return m_next_state;
-	m_done = true;
 };
 
 bool MenuState::IsType(const std::string &type) {
@@ -210,7 +211,6 @@ void MenuState::SpawnMenuCrosshair(SpriteManager *sprite_manager){
 				if(m_objects[i]->GetCollider()->Overlap(m_optionstext->GetCollider(), Vector2(m_mouse->GetX(), m_mouse->GetY()), 28, off)){
 					mgr.SetState("OptionsState");
 					m_changetoOptionsState = true;
-					m_done = true;
 					return true;
 					/*if((off.m_x != 0 && off.m_x != offset.m_x) || (off.m_y != 0 && off.m_y != offset.m_y)){
 						offset += off;

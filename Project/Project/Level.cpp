@@ -7,7 +7,7 @@
 #include "GameObject.h"
 #include "DuckObject.h"
 #include "Collider.h"
-#include "Input.h"
+#include "InputManager.h"
 #include "SoundManager.h"
 #include "SoundClip.h"
 

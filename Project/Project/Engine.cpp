@@ -14,7 +14,7 @@
 #include "Level.h"
 #include "DuckObject.h"
 #include "Engine.h"
-#include "Input.h"
+#include "InputManager.h"
 
 #include "SoundManager.h"
 #include "MusicClip.h"

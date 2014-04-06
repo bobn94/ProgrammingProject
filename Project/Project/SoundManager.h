@@ -18,7 +18,15 @@ public:
 	~SoundManager();
 	MusicClip* CreateMusic(std::string p_sPath);
 	SoundClip* CreateSound(std::string p_sPath);
+
+	void PlayNext();
+	void PlayPrev();
+	void PlayPause();
+	void Stop();
+	MusicClip* GetMusicClip();
+
 private:
+	int m_current;
 	std::map<std::string, Mix_Music*> m_axMusic;
 	std::map<std::string, Mix_Chunk*> m_axSounds;
 	std::vector<MusicClip*> m_axMusicClips;

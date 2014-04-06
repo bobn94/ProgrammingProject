@@ -87,7 +87,8 @@
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameStateA.cpp" />
-    <ClCompile Include="Input.cpp" />
+    <ClCompile Include="GlobalConfig.cpp" />
+    <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="Log.cpp" />
     <ClCompile Include="main.cpp" />
@@ -109,7 +110,8 @@
     <ClInclude Include="Engine.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameStateA.h" />
-    <ClInclude Include="Input.h" />
+    <ClInclude Include="GlobalConfig.h" />
+    <ClInclude Include="InputManager.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="Log.h" />
     <ClInclude Include="MenuState.h" />

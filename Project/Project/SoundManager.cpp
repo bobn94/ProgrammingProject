@@ -78,3 +78,42 @@ SoundClip* SoundManager::CreateSound(std::string p_sPath) {
 	m_axSoundClips.push_back(xRet);
 	return xRet;
 };
+
+void SoundManager::PlayPause()
+{
+	if(m_axMusicClips[m_current]!=nullptr)
+	{
+		m_axMusicClips[m_current]->Pause();
+	}
+	
+}
+
+void SoundManager::Stop()
+{
+	m_axMusicClips[m_current]->Stop();
+}
+
+
+void SoundManager::PlayNext()
+{
+	m_axMusicClips[m_current]->Stop();
+	m_current = (m_current + 1) % m_axMusicClips.size();
+	m_axMusicClips[m_current]->Play();
+
+
+}
+void SoundManager::PlayPrev()
+{
+
+	m_axMusicClips[m_current]->Stop();
+	m_current = (m_current - 1) % m_axMusicClips.size();
+	m_axMusicClips[m_current]->Play();
+
+
+}
+
+
+MusicClip* SoundManager::GetMusicClip()
+{
+	return m_axMusicClips[m_current];    
+}

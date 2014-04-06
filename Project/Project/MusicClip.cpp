@@ -1,6 +1,7 @@
 // MusicClip.cpp
 
 #include "MusicClip.h"
+#include "GlobalConfig.h"
 
 MusicClip::MusicClip() {
 	m_xClip = nullptr;
@@ -40,3 +41,7 @@ void MusicClip::Stop() {
 	Mix_HaltChannel(m_iChannel);
 	m_iChannel = -1;
 };
+
+void MusicClip::Volume() {
+	Mix_VolumeMusic(getMusicVolume());
+}
